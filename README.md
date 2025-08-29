@@ -1,0 +1,2 @@
+# DataCronyx
+AutoEDA and AutoTrainer
