@@ -8,3 +8,4 @@ streamlit
 sqlalchemy
 requests
 joblib
+streamlit-option-menu
