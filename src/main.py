@@ -12,6 +12,7 @@ import home_page
 import base64
 import logging
 from typing import Optional
+import model_training
 
 # Configure logging
 logging.basicConfig(
@@ -51,8 +52,8 @@ st.title("Welcome to DataCronyx")
 
 selected = option_menu(
     menu_title=None,
-    options=['Home', 'Custom EDA', 'Data Preprocessing'],
-    icons=['house-heart', 'bar-chart-fill', 'hammer'],
+    options=['Home', 'Custom EDA', 'Data Preprocessing', 'Model Training'],
+    icons=['house-heart', 'bar-chart-fill', 'hammer', 'cpu'],
     orientation='horizontal'
 )
 
@@ -359,4 +360,51 @@ else:
         except Exception as e:
             st.error(f"Error in Data Preprocessing: {e}")
             logging.error(f"Error in Data Preprocessing: {e}")
+
+    # MODEL TRAINING TAB
+    if selected == 'Model Training':
+        try:
+            st.subheader("Model Training")
+            if st.session_state.get('new_df') is None or st.session_state.new_df.empty:
+                st.warning("No preprocessed data available for model training.")
+                st.stop()
+            df_train = st.session_state.new_df
+
+            # Select target column
+            target_column = st.selectbox("Select Target Column", options=df_train.columns)
+            # Choose problem type
+            problem_type = st.selectbox("Select Problem Type", ["Classification", "Regression"])
+            # Choose model type
+            if problem_type == "Classification":
+                model_type = st.selectbox("Select Model", ["Logistic Regression", "Random Forest"])
+            else:
+                model_type = st.selectbox("Select Model", ["Linear Regression", "Random Forest"])
+
+            test_size = st.slider("Test Size (fraction for test set)", min_value=0.1, max_value=0.5, value=0.2, step=0.05)
+
+            if st.button("Train Model"):
+                X_train, X_test, y_train, y_test = model_training.split_data(df_train, target_column, test_size=test_size)
+                if X_train is None:
+                    st.error("Failed to split data. Please check your input.")
+                    st.stop()
+                if problem_type == "Classification":
+                    model = model_training.train_classification_model(X_train, y_train, model_type)
+                    if model is not None:
+                        metrics = model_training.evaluate_classification_model(model, X_test, y_test)
+                        st.success(f"Model trained: {model_type}")
+                        st.write(f"**Accuracy:** {metrics.get('accuracy'):.4f}")
+                        st.write("**Classification Report:**")
+                        st.json(metrics.get('report'))
+                        st.write("**Confusion Matrix:**")
+                        st.write(metrics.get('confusion_matrix'))
+                else:
+                    model = model_training.train_regression_model(X_train, y_train, model_type)
+                    if model is not None:
+                        metrics = model_training.evaluate_regression_model(model, X_test, y_test)
+                        st.success(f"Model trained: {model_type}")
+                        st.write(f"**Mean Squared Error:** {metrics.get('mse'):.4f}")
+                        st.write(f"**R2 Score:** {metrics.get('r2'):.4f}")
+        except Exception as e:
+            st.error(f"Error in Model Training: {e}")
+            logging.error(f"Error in Model Training: {e}")
 
