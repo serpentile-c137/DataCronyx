@@ -63,9 +63,15 @@ if selected == 'Home':
     home_page.show_home_page()
 
 
+# Sample dataset selection in sidebar
+sample_dataset = st.sidebar.selectbox(
+    "Choose a Sample Dataset",
+    options=["None", "Titanic (Classification)", "Insurance (Regression)"],
+    index=0
+)
+
 # Create a button in the sidebar to upload CSV
-uploaded_file = st.sidebar.file_uploader("Upload Your CSV File Here", type=["csv","xls"])
-use_example_data = st.sidebar.checkbox("Use Example Titanic Dataset", value=False)
+uploaded_file = st.sidebar.file_uploader("Upload Your CSV File Here", type=["csv", "xls"])
 
 # ADDING LINKS TO MY PROFILES 
 st.sidebar.write("#")
@@ -101,33 +107,36 @@ df: Optional[pd.DataFrame] = None
 
 if uploaded_file:
     df = function.load_data(uploaded_file)
-
-
-    # get a copy of original df from the session state or create a new one. this is for preprocessing purposes
     if 'new_df' not in st.session_state:
         st.session_state.new_df = df.copy()
-
     logging.info("Uploaded file loaded and session state updated.")
 
-# Create a checkbox in the sidebar to choose between the example dataset and uploaded dataset
-
-elif use_example_data:
+elif sample_dataset == "Titanic (Classification)":
     try:
         df = function.load_data(file="example_dataset/titanic.csv")
-
-        # Set st.session_state.new_df to the example dataset for data preprocessing
         if 'new_df' not in st.session_state:
             st.session_state.new_df = df
-
-        logging.info("Example dataset loaded and session state updated.")
+        logging.info("Titanic sample dataset loaded and session state updated.")
     except Exception as e:
-        st.error(f"Error loading example dataset: {e}")
-        logging.error(f"Error loading example dataset: {e}")
+        st.error(f"Error loading Titanic dataset: {e}")
+        logging.error(f"Error loading Titanic dataset: {e}")
+
+elif sample_dataset == "Insurance (Regression)":
+    try:
+        df = function.load_data(file="example_dataset/insurance.csv")
+        if 'new_df' not in st.session_state:
+            st.session_state.new_df = df
+        logging.info("Insurance sample dataset loaded and session state updated.")
+    except Exception as e:
+        st.error(f"Error loading Insurance dataset: {e}")
+        logging.error(f"Error loading Insurance dataset: {e}")
 
 # TODO: Some issue related to session_state. When we upload a new dataset, it does not reflect changes in the data preprocessing tab as we are using session state.
 # and the data is defined only once. need to solve this issue.
 # Temporary solution is to reload the page and upload a new dataset
 
+# Define use_example_data based on sample_dataset selection
+use_example_data = sample_dataset != "None"
 
 # Display the dataset preview or any other content here
 if uploaded_file is None and selected!='Home' and not use_example_data:
@@ -417,9 +426,29 @@ else:
             problem_type = st.selectbox("Select Problem Type", ["Classification", "Regression"])
             # Choose model type
             if problem_type == "Classification":
-                model_type = st.selectbox("Select Model", ["Logistic Regression", "Random Forest"])
+                model_type = st.selectbox(
+                    "Select Model", 
+                    [
+                        "Logistic Regression", 
+                        "Random Forest", 
+                        "SVM", 
+                        "Decision Tree", 
+                        "Gradient Boosting"
+                    ]
+                )
             else:
-                model_type = st.selectbox("Select Model", ["Linear Regression", "Random Forest"])
+                model_type = st.selectbox(
+                    "Select Model", 
+                    [
+                        "Linear Regression", 
+                        "Random Forest", 
+                        "Ridge", 
+                        "Lasso", 
+                        "SVM", 
+                        "Decision Tree", 
+                        "Gradient Boosting"
+                    ]
+                )
 
             test_size = st.slider("Test Size (fraction for test set)", min_value=0.1, max_value=0.5, value=0.2, step=0.05)
 

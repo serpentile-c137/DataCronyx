@@ -2,8 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge, Lasso
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier, GradientBoostingRegressor
+from sklearn.svm import SVC, SVR
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, mean_squared_error, r2_score
 import logging
 from typing import Tuple, Any, Dict
@@ -46,6 +48,12 @@ def train_classification_model(
             model = LogisticRegression(max_iter=1000)
         elif model_type == "Random Forest":
             model = RandomForestClassifier()
+        elif model_type == "SVM":
+            model = SVC(probability=True)
+        elif model_type == "Decision Tree":
+            model = DecisionTreeClassifier()
+        elif model_type == "Gradient Boosting":
+            model = GradientBoostingClassifier()
         else:
             st.warning("Unsupported model type. Using Logistic Regression.")
             model = LogisticRegression(max_iter=1000)
@@ -86,6 +94,16 @@ def train_regression_model(
             model = LinearRegression()
         elif model_type == "Random Forest":
             model = RandomForestRegressor()
+        elif model_type == "Ridge":
+            model = Ridge()
+        elif model_type == "Lasso":
+            model = Lasso()
+        elif model_type == "SVM":
+            model = SVR()
+        elif model_type == "Decision Tree":
+            model = DecisionTreeRegressor()
+        elif model_type == "Gradient Boosting":
+            model = GradientBoostingRegressor()
         else:
             st.warning("Unsupported model type. Using Linear Regression.")
             model = LinearRegression()
