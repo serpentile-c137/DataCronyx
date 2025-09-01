@@ -1,13 +1,15 @@
 # DataCronyx
 
-**DataCronyx** is an interactive web application for Automated Exploratory Data Analysis (AutoEDA) and data preprocessing. It provides a user-friendly interface for data analysts, scientists, business professionals, and students to explore, visualize, and preprocess datasets with minimal coding.
+**DataCronyx** is an interactive web application for Automated Exploratory Data Analysis (AutoEDA), data preprocessing, feature engineering, and model training. It provides a user-friendly interface for data analysts, scientists, business professionals, and students to explore, visualize, preprocess, engineer features, and train models on datasets with minimal coding.
 
 ## Features
 
 - **Interactive Data Exploration:** Visualize and analyze datasets with summary statistics, missing value reports, and data type overviews.
 - **Custom EDA:** Generate histograms, scatter plots, box plots, and correlation heatmaps for in-depth data understanding.
 - **Data Preprocessing:** Remove columns, handle missing values, encode categorical variables, scale features, and detect/handle outliers.
-- **One-click Download:** Export your preprocessed data for further analysis or modeling.
+- **Feature Engineering:** Perform Principal Component Analysis (PCA) and K-Best feature selection interactively.
+- **Model Training:** Train and evaluate classification and regression models (Logistic Regression, Random Forest, Linear Regression) with a simple UI.
+- **Download Options:** Export your preprocessed data as CSV and trained models as PKL files for further use.
 - **User-Friendly Interface:** Built with [Streamlit](https://streamlit.io/) for an intuitive and responsive experience.
 
 ## Getting Started
@@ -44,12 +46,16 @@ Open your browser at [http://localhost:8501](http://localhost:8501) to use DataC
 - **Home:** Overview and instructions.
 - **Custom EDA:** Upload your CSV or use the example Titanic dataset. Explore data structure, missing values, statistics, and visualizations.
 - **Data Preprocessing:** Remove columns, handle missing data, encode categorical features, scale numerical features, and manage outliers. Download the cleaned dataset.
+- **Feature Engineering:** Apply PCA or K-Best feature selection to your data.
+- **Model Training:** Train classification or regression models and download the trained model as a `.pkl` file.
 
 ## File Structure
 
 - `src/main.py` - Main Streamlit app entry point.
 - `src/data_analysis_functions.py` - Functions for EDA and visualization.
 - `src/data_preprocessing_function.py` - Functions for data cleaning and preprocessing.
+- `src/feature_engineering.py` - Functions for feature engineering (PCA, K-Best).
+- `src/model_training.py` - Functions for model training and evaluation.
 - `src/home_page.py` - Home page UI and custom CSS.
 - `example_dataset/` - Example datasets (e.g., Titanic).
 
@@ -65,6 +71,7 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 - Built with [Streamlit](https://streamlit.io/)
 - Visualization powered by [Plotly](https://plotly.com/) and [Seaborn](https://seaborn.pydata.org/)
+- Machine learning by [scikit-learn](https://scikit-learn.org/)
 
 ---
 *Unleash the Power of Data with DataCronyx!*
