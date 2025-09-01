@@ -13,6 +13,8 @@ import base64
 import logging
 from typing import Optional
 import model_training
+import feature_engineering
+import pickle
 
 # Configure logging
 logging.basicConfig(
@@ -52,8 +54,8 @@ st.title("Welcome to DataCronyx")
 
 selected = option_menu(
     menu_title=None,
-    options=['Home', 'Custom EDA', 'Data Preprocessing', 'Model Training'],
-    icons=['house-heart', 'bar-chart-fill', 'hammer', 'cpu'],
+    options=['Home', 'Custom EDA', 'Data Preprocessing', 'Feature Engineering', 'Model Training'],
+    icons=['house-heart', 'bar-chart-fill', 'hammer', 'magic', 'cpu'],
     orientation='horizontal'
 )
 
@@ -361,6 +363,45 @@ else:
             st.error(f"Error in Data Preprocessing: {e}")
             logging.error(f"Error in Data Preprocessing: {e}")
 
+    # FEATURE ENGINEERING TAB
+    if selected == 'Feature Engineering':
+        try:
+            st.subheader("Feature Engineering")
+            if st.session_state.get('new_df') is None or st.session_state.new_df.empty:
+                st.warning("No preprocessed data available for feature engineering.")
+                st.stop()
+            df_fe = st.session_state.new_df
+
+            st.markdown("### Principal Component Analysis (PCA)")
+            n_numeric = len(df_fe.select_dtypes(include=[np.number]).columns)
+            n_components = st.slider("Number of PCA Components", min_value=1, max_value=max(1, n_numeric), value=min(2, n_numeric))
+            if st.button("Apply PCA"):
+                pca_df, pca_model = feature_engineering.apply_pca(df_fe, n_components)
+                if pca_model is not None:
+                    st.success(f"PCA applied. Explained variance ratio: {np.round(pca_model.explained_variance_ratio_, 3)}")
+                    st.dataframe(pca_df)
+                    # Optionally, allow user to save/replace new_df with PCA result
+                    if st.checkbox("Replace current data with PCA result"):
+                        st.session_state.new_df = pca_df
+
+            st.markdown("### K-Best Feature Selection")
+            target_column = st.selectbox("Select Target Column for K-Best", options=df_fe.columns)
+            problem_type = st.selectbox("Problem Type for K-Best", ["classification", "regression"])
+            k = st.slider("Number of Features (K)", min_value=1, max_value=max(1, n_numeric), value=min(2, n_numeric))
+            if st.button("Apply K-Best Feature Selection"):
+                kbest_df, selected_features = feature_engineering.select_k_best_features(
+                    df_fe.drop(columns=[target_column]), df_fe[target_column], k, problem_type
+                )
+                if selected_features is not None:
+                    st.success(f"Selected features: {selected_features}")
+                    st.dataframe(kbest_df)
+                    # Optionally, allow user to save/replace new_df with K-best result + target
+                    if st.checkbox("Replace current data with K-best features + target"):
+                        st.session_state.new_df = pd.concat([kbest_df, df_fe[target_column]], axis=1)
+        except Exception as e:
+            st.error(f"Error in Feature Engineering: {e}")
+            logging.error(f"Error in Feature Engineering: {e}")
+
     # MODEL TRAINING TAB
     if selected == 'Model Training':
         try:
@@ -387,6 +428,8 @@ else:
                 if X_train is None:
                     st.error("Failed to split data. Please check your input.")
                     st.stop()
+                model = None
+                metrics = None
                 if problem_type == "Classification":
                     model = model_training.train_classification_model(X_train, y_train, model_type)
                     if model is not None:
@@ -394,7 +437,11 @@ else:
                         st.success(f"Model trained: {model_type}")
                         st.write(f"**Accuracy:** {metrics.get('accuracy'):.4f}")
                         st.write("**Classification Report:**")
-                        st.json(metrics.get('report'))
+                        report = metrics.get('report')
+                        if report:
+                            import pandas as pd
+                            report_df = pd.DataFrame(report).transpose()
+                            st.dataframe(report_df.style.format("{:.3f}").background_gradient(cmap="Blues"), use_container_width=True)
                         st.write("**Confusion Matrix:**")
                         st.write(metrics.get('confusion_matrix'))
                 else:
@@ -404,6 +451,16 @@ else:
                         st.success(f"Model trained: {model_type}")
                         st.write(f"**Mean Squared Error:** {metrics.get('mse'):.4f}")
                         st.write(f"**R2 Score:** {metrics.get('r2'):.4f}")
+
+                # Download trained model as PKL
+                if model is not None:
+                    model_bytes = pickle.dumps(model)
+                    st.download_button(
+                        label="Download Trained Model (PKL)",
+                        data=model_bytes,
+                        file_name="trained_model.pkl",
+                        mime="application/octet-stream"
+                    )
         except Exception as e:
             st.error(f"Error in Model Training: {e}")
             logging.error(f"Error in Model Training: {e}")
