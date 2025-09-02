@@ -478,8 +478,11 @@ else:
                     if model is not None:
                         metrics = model_training.evaluate_regression_model(model, X_test, y_test)
                         st.success(f"Model trained: {model_type}")
-                        st.write(f"**Mean Squared Error:** {metrics.get('mse'):.4f}")
+                        st.write(f"**Mean Squared Error (MSE):** {metrics.get('mse'):.4f}")
+                        st.write(f"**Root Mean Squared Error (RMSE):** {metrics.get('rmse'):.4f}")
+                        st.write(f"**Mean Absolute Error (MAE):** {metrics.get('mae'):.4f}")
                         st.write(f"**R2 Score:** {metrics.get('r2'):.4f}")
+                        st.write(f"**Explained Variance:** {metrics.get('explained_variance'):.4f}")
 
                 # Download trained model as PKL
                 if model is not None:

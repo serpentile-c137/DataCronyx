@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge, La
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier, GradientBoostingRegressor
 from sklearn.svm import SVC, SVR
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, mean_squared_error, r2_score, mean_absolute_error, explained_variance_score
 import logging
 from typing import Tuple, Any, Dict
 
@@ -124,9 +124,18 @@ def evaluate_regression_model(
     try:
         y_pred = model.predict(X_test)
         mse = mean_squared_error(y_test, y_pred)
+        rmse = np.sqrt(mse)
+        mae = mean_absolute_error(y_test, y_pred)
         r2 = r2_score(y_test, y_pred)
-        logging.info(f"Regression MSE: {mse}, R2: {r2}")
-        return {"mse": mse, "r2": r2}
+        explained_var = explained_variance_score(y_test, y_pred)
+        logging.info(f"Regression MSE: {mse}, RMSE: {rmse}, MAE: {mae}, R2: {r2}, Explained Variance: {explained_var}")
+        return {
+            "mse": mse,
+            "rmse": rmse,
+            "mae": mae,
+            "r2": r2,
+            "explained_variance": explained_var
+        }
     except Exception as e:
         logging.error(f"Error evaluating regression model: {e}")
         st.error(f"Error evaluating regression model: {e}")
