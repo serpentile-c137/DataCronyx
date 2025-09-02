@@ -1,0 +1,49 @@
+2025-09-02 14:55:05,059 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 14:55:05,064 [INFO] Home page displayed successfully.
+2025-09-02 14:55:20,159 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 14:55:20,165 [INFO] Home page displayed successfully.
+2025-09-02 14:55:20,185 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:20,186 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:22,313 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:22,314 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:22,319 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-02 14:55:35,593 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:35,593 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:35,764 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:55:52,980 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:52,980 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:53,119 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:55:53,683 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:53,683 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:53,872 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:55:54,296 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:54,297 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:54,446 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:55:56,979 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:56,979 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:57,127 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:55:57,812 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:55:57,812 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:55:57,827 [INFO] Label encoded columns: ['sex', 'smoker', 'region']
+2025-09-02 14:55:57,828 [INFO] Label encoding applied to columns: ['sex', 'smoker', 'region']
+2025-09-02 14:55:57,989 [INFO] Detected 0 outliers in age using z-score
+2025-09-02 14:56:04,836 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:56:04,836 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:56:10,364 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:56:10,365 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:56:18,130 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:56:18,130 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:56:19,152 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 14:56:19,152 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 14:56:19,162 [INFO] Data split: (1070, 6), (268, 6)
+2025-09-02 14:56:19,726 [INFO] Trained Random Forest regressor.
+2025-09-02 14:56:19,748 [INFO] Regression MSE: 29.906492164179106, RMSE: 5.468682854598455, MAE: 2.695634328358209, R2: 0.8460496877889027, Explained Variance: 0.8466144660209414
+2025-09-02 14:57:24,078 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 14:57:24,081 [INFO] Home page displayed successfully.
+2025-09-02 14:57:29,081 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 14:57:29,087 [INFO] Home page displayed successfully.
+2025-09-02 14:57:29,111 [INFO] Loaded data with shape (891, 12)
+2025-09-02 14:57:29,111 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-02 14:57:31,072 [INFO] Loaded data with shape (891, 12)
+2025-09-02 14:57:31,073 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-02 14:57:31,256 [INFO] Detected 0 outliers in PassengerId using z-score
