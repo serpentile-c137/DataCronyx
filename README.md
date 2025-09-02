@@ -4,6 +4,7 @@ DataCronyx is an automated exploratory data analysis (EDA) and machine learning 
 
 ## Features
 
+- **Sidebar Navigation:** All main actions (EDA, preprocessing, feature engineering, model training) are accessible from the always-open sidebar.
 - **Interactive EDA:** Visualize and explore your datasets with a variety of charts and statistics.
 - **Data Preprocessing:** Handle missing values, encode categorical variables, scale features, and manage outliers.
 - **Feature Engineering:** Apply PCA and K-Best feature selection.
@@ -41,11 +42,9 @@ DataCronyx is an automated exploratory data analysis (EDA) and machine learning 
 
 ## Usage
 
-- Select a sample dataset or upload your own.
-- Explore the data using the "Custom EDA" tab.
-- Preprocess your data in the "Data Preprocessing" tab.
-- Engineer features in the "Feature Engineering" tab.
-- Train and evaluate models in the "Model Training" tab.
+- Use the sidebar to select a sample dataset or upload your own.
+- Navigate between "Custom EDA", "Data Preprocessing", "Feature Engineering", and "Model Training" using the sidebar.
+- Explore, preprocess, engineer features, and train models all within the app.
 
 ## Supported Models
 
