@@ -5,7 +5,6 @@ import numpy as np
 import seaborn as sns
 from collections import Counter
 import plotly.express as px
-from streamlit_option_menu import option_menu
 import data_analysis_functions as function
 import data_preprocessing_function as preprocessing_function
 import home_page
@@ -38,7 +37,11 @@ if not any(isinstance(h, TimedRotatingFileHandler) and getattr(h, 'baseFilename'
 
 
 # # page config sets the text and icon that we see on the tab
-st.set_page_config(page_icon="✨", page_title="DataCronyx")
+st.set_page_config(
+    page_icon="✨",
+    page_title="DataCronyx",
+    initial_sidebar_state="expanded"  # <-- This keeps the sidebar always open
+)
 
 hide_st_style = """
             <style>
@@ -54,7 +57,8 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 # Create a Streamlit sidebar
-st.sidebar.title("DataCronyx: Automated Exploratory Data Analysis and AutoTrainer")
+st.sidebar.title("DataCronyx")
+# st.sidebar.title("DataCronyx: Automated Exploratory Data Analysis and AutoTrainer")
 
 # Set custom CSS
 custom_css = home_page.custom_css
@@ -65,11 +69,17 @@ st.title("Welcome to DataCronyx")
 # st.write('<div class="tagline">Unleash the Power of Data with DataCronyx!</div>', unsafe_allow_html=True)
 
 
-selected = option_menu(
-    menu_title=None,
+selected = st.sidebar.radio(
+    "Navigation",
     options=['Home', 'Custom EDA', 'Data Preprocessing', 'Feature Engineering', 'Model Training'],
-    icons=['house-heart', 'bar-chart-fill', 'hammer', 'magic', 'cpu'],
-    orientation='horizontal'
+    index=0,
+    format_func=lambda x: {
+        'Home': '🏠 Home',
+        'Custom EDA': '📊 Custom EDA',
+        'Data Preprocessing': '🛠️ Data Preprocessing',
+        'Feature Engineering': '✨ Feature Engineering',
+        'Model Training': '🤖 Model Training'
+    }[x]
 )
 
 if selected == 'Home':
@@ -164,7 +174,7 @@ else:
 
     if selected=='Custom EDA':
         try:
-            tab1, tab2 = st.tabs(['📊 Dataset Overview :clipboard', "🔎 Data Exploration and Visualization"])
+            tab1, tab2 = st.tabs(['📊 Dataset Overview', "🔎 Data Exploration and Visualization"])
             num_columns, cat_columns = function.categorical_numerical(df)
             
             

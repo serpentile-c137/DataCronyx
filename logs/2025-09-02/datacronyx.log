@@ -47,3 +47,45 @@
 2025-09-02 14:57:31,072 [INFO] Loaded data with shape (891, 12)
 2025-09-02 14:57:31,073 [INFO] Titanic sample dataset loaded and session state updated.
 2025-09-02 14:57:31,256 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-02 19:19:46,474 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 19:19:46,475 [INFO] Home page displayed successfully.
+2025-09-02 19:20:17,006 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 19:20:17,008 [INFO] Home page displayed successfully.
+2025-09-02 19:20:25,286 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 19:20:25,287 [INFO] Home page displayed successfully.
+2025-09-02 19:20:40,080 [INFO] Loaded data with shape (891, 12)
+2025-09-02 19:20:40,080 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-02 19:20:40,085 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-02 19:21:12,908 [INFO] Loaded data with shape (891, 12)
+2025-09-02 19:21:12,908 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-02 19:21:13,037 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-02 19:21:15,187 [INFO] Loaded data with shape (891, 12)
+2025-09-02 19:21:15,188 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-02 19:21:19,223 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:21:19,223 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:21:22,337 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:21:22,337 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:21:22,415 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-02 19:21:23,030 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:21:23,031 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:21:23,032 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-02 19:22:18,560 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:18,560 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:18,654 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-02 19:22:19,934 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:19,935 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:19,936 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-02 19:22:30,539 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:30,539 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:31,201 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:31,201 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:31,822 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:31,823 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:31,953 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-02 19:22:32,469 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:32,469 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-02 19:22:32,472 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-02 19:22:33,469 [INFO] Custom dark theme CSS generated successfully.
+2025-09-02 19:22:33,472 [INFO] Home page displayed successfully.
+2025-09-02 19:22:33,478 [INFO] Loaded data with shape (1338, 7)
+2025-09-02 19:22:33,478 [INFO] Insurance sample dataset loaded and session state updated.
