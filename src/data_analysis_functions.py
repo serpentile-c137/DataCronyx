@@ -10,14 +10,27 @@ import seaborn as sns
 from collections import Counter
 import plotly.express as px
 import logging
+import os
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
 from typing import List, Tuple, Any
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[logging.StreamHandler()]
-)
+# Ensure logs directory exists (date-wise)
+log_date = datetime.now().strftime("%Y-%m-%d")
+log_dir = os.path.join(os.path.dirname(__file__), '../logs', log_date)
+os.makedirs(log_dir, exist_ok=True)
+
+# Configure logging: daily rotating, shared logfile in date-wise folder
+logfile_path = os.path.join(log_dir, 'datacronyx.log')
+if not any(isinstance(h, TimedRotatingFileHandler) and getattr(h, 'baseFilename', None) == logfile_path for h in logging.getLogger().handlers):
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            TimedRotatingFileHandler(logfile_path, when="midnight", backupCount=30, encoding='utf-8')
+        ]
+    )
 
 # Function to load the csv data to a dataframe
 def load_data(file: Any) -> pd.DataFrame:

@@ -1,12 +1,25 @@
 import streamlit as st
 import logging
+import os
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[logging.StreamHandler()]
-)
+# Ensure logs directory exists (date-wise)
+log_date = datetime.now().strftime("%Y-%m-%d")
+log_dir = os.path.join(os.path.dirname(__file__), '../logs', log_date)
+os.makedirs(log_dir, exist_ok=True)
+
+# Configure logging: daily rotating, shared logfile in date-wise folder
+logfile_path = os.path.join(log_dir, 'datacronyx.log')
+if not any(isinstance(h, TimedRotatingFileHandler) and getattr(h, 'baseFilename', None) == logfile_path for h in logging.getLogger().handlers):
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            TimedRotatingFileHandler(logfile_path, when="midnight", backupCount=30, encoding='utf-8')
+        ]
+    )
 
 def show_home_page() -> None:
     """Display the home page content for DataCronyx."""
