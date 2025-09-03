@@ -90,3 +90,81 @@
 2025-09-03 10:23:09,914 [INFO] Data split: (712, 7), (179, 7)
 2025-09-03 10:23:10,122 [INFO] Trained Gradient Boosting classifier.
 2025-09-03 10:23:10,144 [INFO] Classification accuracy: 0.8100558659217877
+2025-09-03 10:33:29,352 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:33:29,358 [INFO] Home page displayed successfully.
+2025-09-03 10:34:27,994 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:34:27,999 [INFO] Home page displayed successfully.
+2025-09-03 11:17:32,396 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:17:32,401 [INFO] Home page displayed successfully.
+2025-09-03 11:17:44,833 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:17:44,840 [INFO] Home page displayed successfully.
+2025-09-03 11:21:20,559 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:21:20,566 [INFO] Home page displayed successfully.
+2025-09-03 11:21:35,372 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:21:35,378 [INFO] Home page displayed successfully.
+2025-09-03 11:23:15,645 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:23:15,649 [INFO] Home page displayed successfully.
+2025-09-03 11:23:21,444 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:23:21,450 [INFO] Home page displayed successfully.
+2025-09-03 11:23:26,846 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:23:26,852 [INFO] Home page displayed successfully.
+2025-09-03 11:23:34,143 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:23:34,150 [INFO] Home page displayed successfully.
+2025-09-03 11:23:50,656 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:23:50,665 [INFO] Home page displayed successfully.
+2025-09-03 11:23:50,795 [INFO] Loaded SQL data with shape (891, 12)
+2025-09-03 11:23:50,796 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:23:57,045 [INFO] Loaded SQL data with shape (891, 12)
+2025-09-03 11:23:57,046 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:24:36,486 [INFO] Loaded SQL data with shape (891, 12)
+2025-09-03 11:24:36,487 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:24:37,616 [INFO] Loaded SQL data with shape (891, 12)
+2025-09-03 11:24:37,617 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:24:49,393 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:24:49,393 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:28:28,425 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:28:28,429 [INFO] Home page displayed successfully.
+2025-09-03 11:28:37,473 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:28:37,479 [INFO] Home page displayed successfully.
+2025-09-03 11:28:41,413 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:28:41,420 [INFO] Home page displayed successfully.
+2025-09-03 11:29:08,747 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 11:29:08,754 [INFO] Home page displayed successfully.
+2025-09-03 11:29:08,802 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:08,803 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:15,100 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:15,100 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:15,107 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-03 11:29:21,902 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:21,902 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:22,109 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:35,593 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:35,593 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:35,743 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:36,822 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:36,822 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:36,963 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:37,428 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:37,429 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:37,603 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:39,918 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:39,918 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:40,099 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:41,133 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:41,133 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:41,154 [INFO] Label encoded columns: ['sex', 'smoker', 'region']
+2025-09-03 11:29:41,155 [INFO] Label encoding applied to columns: ['sex', 'smoker', 'region']
+2025-09-03 11:29:41,276 [INFO] Detected 0 outliers in age using z-score
+2025-09-03 11:29:47,396 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:47,397 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:52,027 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:52,027 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:29:56,914 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:29:56,915 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:30:09,256 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:30:09,256 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:30:10,808 [INFO] Loaded SQL data with shape (1338, 7)
+2025-09-03 11:30:10,808 [INFO] SQL data loaded and session state updated.
+2025-09-03 11:30:10,824 [INFO] Data split: (1070, 6), (268, 6)
+2025-09-03 11:30:10,842 [INFO] Trained Linear Regression regressor.
+2025-09-03 11:30:10,847 [INFO] Regression MSE: 142.2258490724375, RMSE: 11.925847939347436, MAE: 10.000114775812202, R2: 0.2678608461002979, Explained Variance: 0.2687544274400431

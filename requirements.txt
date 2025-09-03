@@ -10,3 +10,4 @@ requests
 joblib
 streamlit-option-menu
 openpyxl
+pymysql

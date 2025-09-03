@@ -152,10 +152,12 @@ df: Optional[pd.DataFrame] = None
 
 if file_type == "SQL" and sql_connection is not None and sql_query:
     df = function.load_data(file=None, file_type="sql", sql_query=sql_query, sql_connection=sql_connection)
-    if 'new_df' not in st.session_state:
-        st.session_state.new_df = df.copy()
-    logging.info("SQL data loaded and session state updated.")
-
+    if df is not None and not df.empty:
+        if 'new_df' not in st.session_state:
+            st.session_state.new_df = df.copy()
+        logging.info("SQL data loaded and session state updated.")
+    else:
+        st.warning("No data returned from SQL query. Please check your query and connection.")
 elif uploaded_file:
     # Detect file type for load_data
     detected_type = "csv" if file_type == "CSV" else "excel"
@@ -163,7 +165,6 @@ elif uploaded_file:
     if 'new_df' not in st.session_state:
         st.session_state.new_df = df.copy()
     logging.info("Uploaded file loaded and session state updated.")
-
 elif sample_dataset == "Titanic (Classification)":
     try:
         df = function.load_data(file="example_dataset/titanic.csv", file_type="csv")
@@ -173,7 +174,6 @@ elif sample_dataset == "Titanic (Classification)":
     except Exception as e:
         st.error(f"Error loading Titanic dataset: {e}")
         logging.error(f"Error loading Titanic dataset: {e}")
-
 elif sample_dataset == "Insurance (Regression)":
     try:
         df = function.load_data(file="example_dataset/insurance.csv", file_type="csv")
@@ -192,15 +192,15 @@ elif sample_dataset == "Insurance (Regression)":
 use_example_data = sample_dataset != "None"
 
 # Display the dataset preview or any other content here
-if uploaded_file is None and selected!='Home' and not use_example_data:
-    # st.subheader("Welcome to DataExplora!")
-    st.markdown("#### Use the sidebar to upload a CSV file or use the provided example dataset and explore your data.")
-    
+if uploaded_file is None and selected!='Home' and not use_example_data and not (file_type == "SQL" and sql_connection is not None and sql_query):
+    st.markdown("#### Use the sidebar to upload a CSV/Excel file, connect to SQL, or use the provided example dataset and explore your data.")
 else:
-    
     if df is None or df.empty:
         st.warning("No data available for exploration or preprocessing.")
         st.stop()
+    else:
+        st.write("### Data Preview")
+        st.dataframe(df)
 
     if selected=='Custom EDA':
         try:
