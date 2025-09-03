@@ -93,8 +93,30 @@ sample_dataset = st.sidebar.selectbox(
     index=0
 )
 
-# Create a button in the sidebar to upload CSV
-uploaded_file = st.sidebar.file_uploader("Upload Your CSV File Here", type=["csv", "xls"])
+# File type selection for upload
+file_type = st.sidebar.selectbox(
+    "Select Data Source Type",
+    options=["CSV", "Excel", "SQL"],
+    index=0
+)
+
+uploaded_file = None
+sql_query = None
+sql_connection = None
+
+if file_type in ["CSV", "Excel"]:
+    file_exts = ["csv"] if file_type == "CSV" else ["xls", "xlsx"]
+    uploaded_file = st.sidebar.file_uploader(f"Upload Your {file_type} File Here", type=file_exts)
+elif file_type == "SQL":
+    st.sidebar.markdown("**Enter SQL Connection Details**")
+    sql_conn_str = st.sidebar.text_input("SQLAlchemy Connection String", value="", help="e.g. sqlite:///mydb.db or mysql+pymysql://user:pass@host/db")
+    sql_query = st.sidebar.text_area("SQL Query", value="", help="e.g. SELECT * FROM my_table")
+    if sql_conn_str and sql_query:
+        try:
+            import sqlalchemy
+            sql_connection = sqlalchemy.create_engine(sql_conn_str)
+        except Exception as e:
+            st.sidebar.error(f"Error creating SQL connection: {e}")
 
 # ADDING LINKS TO MY PROFILES 
 st.sidebar.write("#")
@@ -128,15 +150,23 @@ icon_height = 80
 
 df: Optional[pd.DataFrame] = None
 
-if uploaded_file:
-    df = function.load_data(uploaded_file)
+if file_type == "SQL" and sql_connection is not None and sql_query:
+    df = function.load_data(file=None, file_type="sql", sql_query=sql_query, sql_connection=sql_connection)
+    if 'new_df' not in st.session_state:
+        st.session_state.new_df = df.copy()
+    logging.info("SQL data loaded and session state updated.")
+
+elif uploaded_file:
+    # Detect file type for load_data
+    detected_type = "csv" if file_type == "CSV" else "excel"
+    df = function.load_data(uploaded_file, file_type=detected_type)
     if 'new_df' not in st.session_state:
         st.session_state.new_df = df.copy()
     logging.info("Uploaded file loaded and session state updated.")
 
 elif sample_dataset == "Titanic (Classification)":
     try:
-        df = function.load_data(file="example_dataset/titanic.csv")
+        df = function.load_data(file="example_dataset/titanic.csv", file_type="csv")
         if 'new_df' not in st.session_state:
             st.session_state.new_df = df
         logging.info("Titanic sample dataset loaded and session state updated.")
@@ -146,7 +176,7 @@ elif sample_dataset == "Titanic (Classification)":
 
 elif sample_dataset == "Insurance (Regression)":
     try:
-        df = function.load_data(file="example_dataset/insurance.csv")
+        df = function.load_data(file="example_dataset/insurance.csv", file_type="csv")
         if 'new_df' not in st.session_state:
             st.session_state.new_df = df
         logging.info("Insurance sample dataset loaded and session state updated.")

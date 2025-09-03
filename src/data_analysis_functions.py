@@ -33,11 +33,39 @@ if not any(isinstance(h, TimedRotatingFileHandler) and getattr(h, 'baseFilename'
     )
 
 # Function to load the csv data to a dataframe
-def load_data(file: Any) -> pd.DataFrame:
-    """Load CSV data from a file-like object or path into a DataFrame."""
+def load_data(file: Any, file_type: str = None, sql_query: str = None, sql_connection: Any = None) -> pd.DataFrame:
+    """
+    Load data from CSV, Excel, or SQL source into a DataFrame.
+    - file: file-like object, path, or None (for SQL)
+    - file_type: 'csv', 'excel', or 'sql'. If None, inferred from file name.
+    - sql_query: SQL query string (required if file_type == 'sql')
+    - sql_connection: SQLAlchemy engine/connection or DBAPI connection (required if file_type == 'sql')
+    """
     try:
-        df = pd.read_csv(file)
-        logging.info(f"Loaded data with shape {df.shape}")
+        if file_type is None and hasattr(file, 'name'):
+            fname = file.name.lower()
+            if fname.endswith('.csv'):
+                file_type = 'csv'
+            elif fname.endswith('.xls') or fname.endswith('.xlsx'):
+                file_type = 'excel'
+        if file_type == 'csv':
+            df = pd.read_csv(file)
+            logging.info(f"Loaded CSV data with shape {df.shape}")
+        elif file_type == 'excel':
+            try:
+                df = pd.read_excel(file)
+            except ImportError as e:
+                logging.error("openpyxl is required for Excel file support. Please install it using 'pip install openpyxl'.")
+                st.error("Missing optional dependency 'openpyxl'. Please install it using 'pip install openpyxl' to load Excel files.")
+                return pd.DataFrame()
+            logging.info(f"Loaded Excel data with shape {df.shape}")
+        elif file_type == 'sql':
+            if sql_query is None or sql_connection is None:
+                raise ValueError("sql_query and sql_connection must be provided for SQL data loading.")
+            df = pd.read_sql(sql_query, sql_connection)
+            logging.info(f"Loaded SQL data with shape {df.shape}")
+        else:
+            raise ValueError("Unsupported file type. Please provide 'csv', 'excel', or 'sql'.")
         return df
     except Exception as e:
         logging.error(f"Error loading data: {e}")

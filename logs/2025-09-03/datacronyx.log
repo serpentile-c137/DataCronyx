@@ -1,0 +1,92 @@
+2025-09-03 09:09:54,760 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 09:09:54,772 [INFO] Home page displayed successfully.
+2025-09-03 09:31:50,044 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 09:31:50,057 [INFO] Home page displayed successfully.
+2025-09-03 09:31:50,103 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:31:50,105 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:31:51,915 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:31:51,916 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:31:51,932 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-03 09:32:03,207 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:03,208 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:03,216 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-03 09:32:05,374 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:05,375 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:05,384 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-03 09:32:11,329 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:11,330 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:11,720 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-03 09:32:15,408 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:15,408 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:21,871 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:21,871 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:28,234 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:28,235 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:37,383 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:37,384 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:40,221 [INFO] Loaded data with shape (891, 12)
+2025-09-03 09:32:40,221 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-03 09:32:40,520 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-09-03 10:08:22,065 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:08:22,070 [INFO] Home page displayed successfully.
+2025-09-03 10:08:42,423 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:08:42,430 [INFO] Home page displayed successfully.
+2025-09-03 10:08:42,450 [INFO] Loaded CSV data with shape (891, 8)
+2025-09-03 10:08:42,451 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:08:46,473 [INFO] Loaded CSV data with shape (891, 8)
+2025-09-03 10:08:46,473 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:08:46,476 [INFO] Identified 2 numerical and 6 categorical columns
+2025-09-03 10:15:57,205 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:15:57,208 [INFO] Home page displayed successfully.
+2025-09-03 10:16:05,486 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:16:05,492 [INFO] Home page displayed successfully.
+2025-09-03 10:18:08,063 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:18:08,068 [INFO] Home page displayed successfully.
+2025-09-03 10:18:08,081 [ERROR] Error loading data: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-09-03 10:18:08,086 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:18:11,800 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:18:11,806 [INFO] Home page displayed successfully.
+2025-09-03 10:18:50,299 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:18:50,310 [INFO] Home page displayed successfully.
+2025-09-03 10:18:57,987 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:18:57,993 [INFO] Home page displayed successfully.
+2025-09-03 10:19:03,156 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:19:03,162 [INFO] Home page displayed successfully.
+2025-09-03 10:19:03,177 [ERROR] Error loading data: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-09-03 10:19:03,179 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:19:07,083 [ERROR] Error loading data: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-09-03 10:19:07,085 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:20:54,377 [ERROR] openpyxl is required for Excel file support. Please install it using 'pip install openpyxl'.
+2025-09-03 10:20:54,379 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:21:34,183 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:21:34,191 [INFO] Home page displayed successfully.
+2025-09-03 10:21:39,611 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:21:39,617 [INFO] Home page displayed successfully.
+2025-09-03 10:21:44,543 [INFO] Custom dark theme CSS generated successfully.
+2025-09-03 10:21:44,550 [INFO] Home page displayed successfully.
+2025-09-03 10:21:44,883 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:21:44,883 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:21:51,237 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:21:51,238 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:21:51,240 [INFO] Identified 2 numerical and 6 categorical columns
+2025-09-03 10:22:00,143 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:22:00,143 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:22:03,972 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:22:03,972 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:22:41,966 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:22:41,966 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:22:41,983 [INFO] PCA applied with 4 components.
+2025-09-03 10:22:53,467 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:22:53,467 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:22:54,423 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:22:54,423 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:22:54,435 [INFO] Selected top 3 features: ['Pclass', 'Sex', 'Fare']
+2025-09-03 10:23:03,844 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:23:03,845 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:23:09,043 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:23:09,044 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:23:09,904 [INFO] Loaded Excel data with shape (891, 8)
+2025-09-03 10:23:09,905 [INFO] Uploaded file loaded and session state updated.
+2025-09-03 10:23:09,914 [INFO] Data split: (712, 7), (179, 7)
+2025-09-03 10:23:10,122 [INFO] Trained Gradient Boosting classifier.
+2025-09-03 10:23:10,144 [INFO] Classification accuracy: 0.8100558659217877
