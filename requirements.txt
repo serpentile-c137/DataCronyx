@@ -10,4 +10,5 @@ requests
 joblib
 streamlit-option-menu
 openpyxl
-pymysql
+google-generativeai
+dotenv

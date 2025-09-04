@@ -1,0 +1,47 @@
+2025-09-04 11:18:27,710 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:18:27,722 [INFO] Home page displayed successfully.
+2025-09-04 11:18:46,455 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:18:46,464 [INFO] Home page displayed successfully.
+2025-09-04 11:18:46,519 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:18:46,521 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:18:49,909 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:18:49,910 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:18:49,933 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-04 11:25:01,169 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:25:01,182 [INFO] Home page displayed successfully.
+2025-09-04 11:25:10,125 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:25:10,137 [INFO] Home page displayed successfully.
+2025-09-04 11:25:10,181 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:25:10,182 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:25:13,214 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:25:13,215 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:25:13,237 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-04 11:27:52,086 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:27:52,087 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:27:52,512 [INFO] Detected 0 outliers in age using z-score
+2025-09-04 11:27:57,569 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-04 11:27:57,570 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-04 11:27:57,639 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-04 11:42:00,475 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:42:00,487 [INFO] Home page displayed successfully.
+2025-09-04 11:42:08,648 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:42:08,660 [INFO] Home page displayed successfully.
+2025-09-04 11:42:08,748 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:42:08,755 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:42:13,003 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:42:13,004 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:42:13,016 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-04 11:51:55,778 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:51:55,783 [INFO] Home page displayed successfully.
+2025-09-04 11:51:55,796 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:51:55,797 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:51:57,008 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:51:57,009 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:51:57,026 [INFO] Identified 3 numerical and 9 categorical columns
+2025-09-04 11:54:56,764 [INFO] Custom dark theme CSS generated successfully.
+2025-09-04 11:54:56,769 [INFO] Home page displayed successfully.
+2025-09-04 11:54:56,787 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:54:56,788 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:54:57,665 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-04 11:54:57,665 [INFO] Titanic sample dataset loaded and session state updated.
+2025-09-04 11:54:57,684 [INFO] Identified 3 numerical and 9 categorical columns
