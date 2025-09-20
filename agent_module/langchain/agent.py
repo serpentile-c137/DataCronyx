@@ -39,12 +39,12 @@ class MLAgentState(TypedDict):
     messages: Annotated[list, lambda x, y: x + y]
 
 def create_output_directories():
-    """Create output directories for code and summary files"""
-    Path("code").mkdir(exist_ok=True)
-    Path("summary").mkdir(exist_ok=True)
+    """Create output directories for code and summary files inside agent_module/langchain/"""
+    Path("agent_module/langchain/code").mkdir(parents=True, exist_ok=True)
+    Path("agent_module/langchain/summary").mkdir(parents=True, exist_ok=True)
 
 def save_to_file(content: str, filepath: str):
-    """Save content to file"""
+    """Save content to file inside agent_module/langchain/"""
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
@@ -73,7 +73,7 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     eda_code = eda_code_chain.invoke({"dataset_path": state["dataset_path"]})
     
     # Save EDA code
-    save_to_file(eda_code, "code/eda_code.py")
+    save_to_file(eda_code, "agent_module/langchain/code/eda_code.py")
     
     # EDA Summary Generation
     summary_prompt = ChatPromptTemplate.from_template("""
@@ -94,7 +94,7 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     eda_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
     # Save EDA summary
-    save_to_file(eda_summary, "summary/eda_summary.md")
+    save_to_file(eda_summary, "agent_module/langchain/summary/eda_summary.md")
     
     return {
         **state,
@@ -127,7 +127,7 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     prep_code_chain = prep_prompt | llm | StrOutputParser()
     prep_code = prep_code_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(prep_code, "code/preprocess_code.py")
+    save_to_file(prep_code, "agent_module/langchain/code/preprocess_code.py")
     
     # Preprocessing summary
     summary_prompt = ChatPromptTemplate.from_template("""
@@ -145,7 +145,7 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     prep_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(prep_summary, "summary/preprocess_summary.md")
+    save_to_file(prep_summary, "agent_module/langchain/summary/preprocess_summary.md")
     
     return {
         **state,
@@ -176,7 +176,7 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     feat_code_chain = feat_prompt | llm | StrOutputParser()
     feat_code = feat_code_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(feat_code, "code/feature_code.py")
+    save_to_file(feat_code, "agent_module/langchain/code/feature_code.py")
     
     # Feature engineering summary
     summary_prompt = ChatPromptTemplate.from_template("""
@@ -194,7 +194,7 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     feat_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(feat_summary, "summary/feature_summary.md")
+    save_to_file(feat_summary, "agent_module/langchain/summary/feature_summary.md")
     
     return {
         **state,
@@ -226,7 +226,7 @@ def training_node(state: MLAgentState) -> MLAgentState:
     train_code_chain = train_prompt | llm | StrOutputParser()
     train_code = train_code_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(train_code, "code/train_code.py")
+    save_to_file(train_code, "agent_module/langchain/code/train_code.py")
     
     # Training summary
     summary_prompt = ChatPromptTemplate.from_template("""
@@ -245,7 +245,7 @@ def training_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     train_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(train_summary, "summary/train_summary.md")
+    save_to_file(train_summary, "agent_module/langchain/summary/train_summary.md")
     
     return {
         **state,
@@ -278,7 +278,7 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     eval_code_chain = eval_prompt | llm | StrOutputParser()
     eval_code = eval_code_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(eval_code, "code/eval_code.py")
+    save_to_file(eval_code, "agent_module/langchain/code/eval_code.py")
     
     # Evaluation summary
     summary_prompt = ChatPromptTemplate.from_template("""
@@ -298,7 +298,7 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     eval_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(eval_summary, "summary/eval_summary.md")
+    save_to_file(eval_summary, "agent_module/langchain/summary/eval_summary.md")
     
     return {
         **state,
