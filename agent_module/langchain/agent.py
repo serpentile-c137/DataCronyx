@@ -43,8 +43,17 @@ def create_output_directories():
     Path("agent_module/langchain/code").mkdir(parents=True, exist_ok=True)
     Path("agent_module/langchain/summary").mkdir(parents=True, exist_ok=True)
 
-def save_to_file(content: str, filepath: str):
-    """Save content to file inside agent_module/langchain/"""
+def save_to_file(content: str, filepath: str, is_markdown: bool = False):
+    """
+    Save content to file inside agent_module/langchain/.
+    If is_markdown is True, save only the content between ```markdown and ```, excluding the tags.
+    """
+    if is_markdown:
+        # Extract content between ```markdown and ```
+        import re
+        match = re.search(r"```markdown\s*(.*?)\s*```", content, re.DOTALL)
+        if match:
+            content = match.group(1).strip()
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
@@ -66,7 +75,7 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     6. Identify outliers
     7. Analyze target variable distribution (if applicable)
     
-    Generate ONLY the Python code, no explanations. Make sure the code is complete and executable.
+    Generate ONLY the Python code, no explanations. Make sure the code is complete and executable. Also exclude ```python and ```, include only python code between them.
     """)
     
     eda_code_chain = eda_prompt | llm | StrOutputParser()
@@ -94,7 +103,7 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     eda_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
     # Save EDA summary
-    save_to_file(eda_summary, "agent_module/langchain/summary/eda_summary.md")
+    save_to_file(eda_summary, "agent_module/langchain/summary/eda_summary.md", is_markdown=True)
     
     return {
         **state,
@@ -120,7 +129,7 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     5. Create train-test split
     6. Save preprocessed data
     
-    Generate ONLY the Python code, no explanations. Make sure the code is complete and executable.
+    Generate ONLY the Python code, no explanations. Make sure the code is complete and executable. Also exclude ```python and ```, include only python code between them.
     Previous EDA insights should guide your preprocessing decisions.
     """)
     
@@ -145,7 +154,7 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     prep_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(prep_summary, "agent_module/langchain/summary/preprocess_summary.md")
+    save_to_file(prep_summary, "agent_module/langchain/summary/preprocess_summary.md", is_markdown=True)
     
     return {
         **state,
@@ -170,7 +179,7 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     4. Dimensionality reduction if appropriate
     5. Feature importance analysis
     
-    Generate ONLY the Python code, no explanations.
+    Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
     feat_code_chain = feat_prompt | llm | StrOutputParser()
@@ -188,13 +197,13 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     3. Expected impact on model performance
     4. Feature importance insights
     
-    Write in Markdown format.
+    Write in Markdown format. Save only the content between ```markdown and ```. Do not include the ```markdown tags themselves.
     """)
     
     summary_chain = summary_prompt | llm | StrOutputParser()
     feat_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(feat_summary, "agent_module/langchain/summary/feature_summary.md")
+    save_to_file(feat_summary, "agent_module/langchain/summary/feature_summary.md", is_markdown=True)
     
     return {
         **state,
@@ -220,7 +229,7 @@ def training_node(state: MLAgentState) -> MLAgentState:
     5. Save the best model as 'model.pkl'
     6. Generate training metrics
     
-    Generate ONLY the Python code, no explanations.
+    Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
     train_code_chain = train_prompt | llm | StrOutputParser()
@@ -245,7 +254,7 @@ def training_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     train_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(train_summary, "agent_module/langchain/summary/train_summary.md")
+    save_to_file(train_summary, "agent_module/langchain/summary/train_summary.md", is_markdown=True)
     
     return {
         **state,
@@ -272,7 +281,7 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     6. Feature importance visualization
     7. Model interpretation with SHAP values
     
-    Generate ONLY the Python code, no explanations.
+    Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
     eval_code_chain = eval_prompt | llm | StrOutputParser()
@@ -298,7 +307,7 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     summary_chain = summary_prompt | llm | StrOutputParser()
     eval_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
     
-    save_to_file(eval_summary, "agent_module/langchain/summary/eval_summary.md")
+    save_to_file(eval_summary, "agent_module/langchain/summary/eval_summary.md", is_markdown=True)
     
     return {
         **state,
