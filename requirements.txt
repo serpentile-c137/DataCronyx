@@ -12,3 +12,6 @@ streamlit-option-menu
 openpyxl
 google-generativeai
 dotenv
+langgraph
+langchain-community
+langchain-google-genai
