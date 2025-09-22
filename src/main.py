@@ -618,14 +618,20 @@ else:
                     else:
                         st.info(f"No summary generated for {step_name} yet.")
 
-                    # Show code
+                    # Show code and download button
                     code_path = code_dir / code_file
                     if code_path.exists():
                         with open(code_path, "r", encoding="utf-8") as f:
                             code_content = f.read()
                         st.subheader(f"{step_name} Code")
                         st.code(code_content, language="python")
+                        if st.download_button(
+                            label=f"Download {step_name} Python Code",
+                            data=code_content,
+                            file_name=code_file,
+                            mime="text/x-python"
+                        ):
+                            logging.info(f"{step_name} code downloaded as {code_file}")
                     else:
                         st.info(f"No code generated for {step_name} yet.")
 
-                

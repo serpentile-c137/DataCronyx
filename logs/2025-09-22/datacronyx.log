@@ -144,3 +144,88 @@
 2025-09-22 21:41:20,991 [INFO] Evaluation summary generated and saved.
 2025-09-22 21:41:20,992 [INFO] Completed: evaluation -> Next: completed
 2025-09-22 21:41:20,992 [INFO] Pipeline complete! All agent outputs saved.
+2025-09-22 21:45:20,806 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:45:20,808 [INFO] Home page displayed successfully.
+2025-09-22 21:45:23,067 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:45:23,070 [INFO] Home page displayed successfully.
+2025-09-22 21:45:33,526 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:45:33,528 [INFO] Home page displayed successfully.
+2025-09-22 21:45:33,552 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-22 21:45:33,553 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:45:35,960 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-22 21:45:35,960 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:45:39,081 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-22 21:45:39,081 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:45:40,366 [INFO] Starting ML Pipeline with LangGraph...
+2025-09-22 21:45:40,374 [INFO] Using dataset: /var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpfafy8ggs.csv
+2025-09-22 21:45:40,375 [INFO] Processing dataset: /var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpfafy8ggs.csv
+2025-09-22 21:45:47,136 [INFO] Saved file: agent_module/langchain/code/eda_code.py
+2025-09-22 21:45:47,136 [INFO] EDA code generated and saved.
+2025-09-22 21:46:01,850 [INFO] Saved file: agent_module/langchain/summary/eda_summary.md
+2025-09-22 21:46:01,851 [INFO] EDA summary generated and saved.
+2025-09-22 21:46:01,852 [INFO] Completed: eda -> Next: preprocessing
+2025-09-22 21:46:05,770 [INFO] Saved file: agent_module/langchain/code/preprocess_code.py
+2025-09-22 21:46:05,770 [INFO] Preprocessing code generated and saved.
+2025-09-22 21:46:17,649 [INFO] Saved file: agent_module/langchain/summary/preprocess_summary.md
+2025-09-22 21:46:17,649 [INFO] Preprocessing summary generated and saved.
+2025-09-22 21:46:17,650 [INFO] Completed: preprocessing -> Next: feature_engineering
+2025-09-22 21:46:22,769 [INFO] Saved file: agent_module/langchain/code/feature_code.py
+2025-09-22 21:46:22,769 [INFO] Feature engineering code generated and saved.
+2025-09-22 21:46:33,316 [INFO] Saved file: agent_module/langchain/summary/feature_summary.md
+2025-09-22 21:46:33,317 [INFO] Feature engineering summary generated and saved.
+2025-09-22 21:46:33,318 [INFO] Completed: feature_engineering -> Next: training
+2025-09-22 21:46:45,400 [INFO] Saved file: agent_module/langchain/code/train_code.py
+2025-09-22 21:46:45,400 [INFO] Training code generated and saved.
+2025-09-22 21:46:52,369 [INFO] Saved file: agent_module/langchain/summary/train_summary.md
+2025-09-22 21:46:52,369 [INFO] Training summary generated and saved.
+2025-09-22 21:46:52,370 [INFO] Completed: training -> Next: evaluation
+2025-09-22 21:47:01,069 [INFO] Saved file: agent_module/langchain/code/eval_code.py
+2025-09-22 21:47:01,069 [INFO] Evaluation code generated and saved.
+2025-09-22 21:47:11,718 [INFO] Saved file: agent_module/langchain/summary/eval_summary.md
+2025-09-22 21:47:11,718 [INFO] Evaluation summary generated and saved.
+2025-09-22 21:47:11,719 [INFO] Completed: evaluation -> Next: completed
+2025-09-22 21:47:11,719 [INFO] Pipeline complete! All agent outputs saved.
+2025-09-22 21:47:18,666 [INFO] Loaded CSV data with shape (891, 12)
+2025-09-22 21:47:18,666 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:50:37,965 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:50:37,967 [INFO] Home page displayed successfully.
+2025-09-22 21:52:37,830 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:52:37,834 [INFO] Home page displayed successfully.
+2025-09-22 21:52:37,857 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 21:52:37,858 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:53:05,137 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 21:53:05,137 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:53:07,184 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 21:53:07,184 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:53:08,481 [INFO] Starting ML Pipeline with LangGraph...
+2025-09-22 21:53:08,489 [INFO] Using dataset: /var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpjh1kms7r.csv
+2025-09-22 21:53:08,489 [INFO] Processing dataset: /var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpjh1kms7r.csv
+2025-09-22 21:53:12,579 [INFO] Saved file: agent_module/langchain/code/eda_code.py
+2025-09-22 21:53:12,580 [INFO] EDA code generated and saved.
+2025-09-22 21:53:25,586 [INFO] Saved file: agent_module/langchain/summary/eda_summary.md
+2025-09-22 21:53:25,586 [INFO] EDA summary generated and saved.
+2025-09-22 21:53:25,587 [INFO] Completed: eda -> Next: preprocessing
+2025-09-22 21:53:31,848 [INFO] Saved file: agent_module/langchain/code/preprocess_code.py
+2025-09-22 21:53:31,848 [INFO] Preprocessing code generated and saved.
+2025-09-22 21:53:43,095 [INFO] Saved file: agent_module/langchain/summary/preprocess_summary.md
+2025-09-22 21:53:43,095 [INFO] Preprocessing summary generated and saved.
+2025-09-22 21:53:43,096 [INFO] Completed: preprocessing -> Next: feature_engineering
+2025-09-22 21:53:48,932 [INFO] Saved file: agent_module/langchain/code/feature_code.py
+2025-09-22 21:53:48,932 [INFO] Feature engineering code generated and saved.
+2025-09-22 21:53:59,394 [INFO] Saved file: agent_module/langchain/summary/feature_summary.md
+2025-09-22 21:53:59,394 [INFO] Feature engineering summary generated and saved.
+2025-09-22 21:53:59,395 [INFO] Completed: feature_engineering -> Next: training
+2025-09-22 21:54:06,122 [INFO] Saved file: agent_module/langchain/code/train_code.py
+2025-09-22 21:54:06,122 [INFO] Training code generated and saved.
+2025-09-22 21:54:14,329 [INFO] Saved file: agent_module/langchain/summary/train_summary.md
+2025-09-22 21:54:14,330 [INFO] Training summary generated and saved.
+2025-09-22 21:54:14,330 [INFO] Completed: training -> Next: evaluation
+2025-09-22 21:54:21,702 [INFO] Saved file: agent_module/langchain/code/eval_code.py
+2025-09-22 21:54:21,702 [INFO] Evaluation code generated and saved.
+2025-09-22 21:54:34,248 [INFO] Saved file: agent_module/langchain/summary/eval_summary.md
+2025-09-22 21:54:34,248 [INFO] Evaluation summary generated and saved.
+2025-09-22 21:54:34,249 [INFO] Completed: evaluation -> Next: completed
+2025-09-22 21:54:34,249 [INFO] Pipeline complete! All agent outputs saved.
+2025-09-22 21:54:54,180 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 21:54:54,180 [INFO] Uploaded file loaded and session state updated.
+2025-09-22 21:54:54,221 [INFO] Training code downloaded as train_code.py

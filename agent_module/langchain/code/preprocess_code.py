@@ -1,60 +1,72 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
+import pickle
 
 # Load the dataset
-df = pd.read_csv("/var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmp3k4x9s2m.csv")
+df = pd.read_csv('/var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpjh1kms7r.csv')
 
-# Identify numerical and categorical features (replace with actual column names)
-numerical_features = df.select_dtypes(include=np.number).columns.tolist()
-categorical_features = df.select_dtypes(exclude=np.number).columns.tolist()
+# 1. Handle missing values
+# Impute numerical missing values with the mean
+numerical_cols = df.select_dtypes(include=np.number).columns
+imputer_numerical = SimpleImputer(strategy='mean')
+df[numerical_cols] = imputer_numerical.fit_transform(df[numerical_cols])
 
-# Define target variable (replace 'target' with actual target column name)
-TARGET = 'price_range'  # Assuming 'price_range' is the target column
-numerical_features.remove(TARGET)
+# Impute categorical missing values with the mode
+categorical_cols = df.select_dtypes(exclude=np.number).columns
+imputer_categorical = SimpleImputer(strategy='most_frequent')
+df[categorical_cols] = imputer_categorical.fit_transform(df[categorical_cols])
 
-# Preprocessing steps
+# 2. Remove or treat outliers
+# Remove outliers based on IQR for numerical columns
+for col in numerical_cols:
+    Q1 = df[col].quantile(0.25)
+    Q3 = df[col].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    df = df[(df[col] >= lower_bound) & (df[col] <= upper_bound)]
 
-# Numerical features preprocessing
-numerical_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='mean')),  # Impute missing values with mean
-    ('scaler', MinMaxScaler())  # Scale numerical features
-])
+# 3. Encode categorical variables
+# Label encode categorical features
+label_encoders = {}
+for col in categorical_cols:
+    label_encoders[col] = LabelEncoder()
+    df[col] = label_encoders[col].fit_transform(df[col])
 
-# Categorical features preprocessing
-categorical_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='most_frequent')),  # Impute with most frequent
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))  # One-hot encode categorical features
-])
+# 4. Scale numerical features
+# Standardize numerical features
+scaler = StandardScaler()
+df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
 
-# Create preprocessor
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('num', numerical_transformer, numerical_features),
-        ('cat', categorical_transformer, categorical_features)
-    ],
-    remainder='passthrough'  # or 'drop' if you want to exclude the remaining columns
-)
+# 5. Create train-test split
+X = df.drop(columns=['target'], errors='ignore')  # Replace 'target' with actual target column name if it exists
+y = df['target'] if 'target' in df.columns else None  # Replace 'target' with actual target column name if it exists
 
-# Split the data into train and test sets
-X = df.drop(TARGET, axis=1)
-y = df[TARGET]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+if y is not None:
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+else:
+    X_train, X_test = train_test_split(X, test_size=0.2, random_state=42)
+    y_train, y_test = None, None
 
-# Apply preprocessing
-X_train_processed = preprocessor.fit_transform(X_train)
-X_test_processed = preprocessor.transform(X_test)
+# 6. Save preprocessed data and fitted objects
+X_train.to_csv('X_train_preprocessed.csv', index=False)
+X_test.to_csv('X_test_preprocessed.csv', index=False)
 
-# Convert processed data back to DataFrames (optional, but helpful for inspection)
-X_train_processed = pd.DataFrame(X_train_processed)
-X_test_processed = pd.DataFrame(X_test_processed)
+if y_train is not None and y_test is not None:
+    pd.Series(y_train).to_csv('y_train.csv', index=False)
+    pd.Series(y_test).to_csv('y_test.csv', index=False)
 
-# Save the preprocessed data
-X_train_processed.to_csv('X_train_processed.csv', index=False)
-X_test_processed.to_csv('X_test_processed.csv', index=False)
-y_train.to_csv('y_train.csv', index=False)
-y_test.to_csv('y_test.csv', index=False)
+with open('numerical_imputer.pkl', 'wb') as file:
+    pickle.dump(imputer_numerical, file)
+
+with open('categorical_imputer.pkl', 'wb') as file:
+    pickle.dump(imputer_categorical, file)
+
+with open('label_encoders.pkl', 'wb') as file:
+    pickle.dump(label_encoders, file)
+
+with open('scaler.pkl', 'wb') as file:
+    pickle.dump(scaler, file)
