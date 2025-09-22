@@ -13,9 +13,6 @@ from langchain_core.output_parsers import StrOutputParser
 # Load environment variables
 load_dotenv()
 
-# Set your dataset path here
-dataset_path = "../example_dataset/titanic.csv"  # manually set the path
-
 # Initialize the LLM
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",
@@ -346,16 +343,25 @@ def build_ml_pipeline():
     # Compile the workflow
     return workflow.compile()
 
-def main():
-    """Main execution function"""
+def main(dataset_path: str = None):
+    """Main execution function. Accepts dataset_path as argument."""
     print("Starting ML Pipeline with LangGraph...")
-    
+
     # Create output directories
     create_output_directories()
-    
+
     # Build the pipeline
     pipeline = build_ml_pipeline()
-    
+
+    # Dynamically select dataset path
+    # If called from Streamlit, dataset_path will be provided (uploaded file, SQL export, or example)
+    # If not provided, default to Titanic
+    if not dataset_path or not os.path.exists(dataset_path):
+        print("No valid dataset path provided. Using default Titanic dataset.")
+        dataset_path = "../example_dataset/titanic.csv"
+    else:
+        print(f"Using dataset: {dataset_path}")
+
     # Initial state
     initial_state = {
         "dataset_path": dataset_path,
@@ -372,9 +378,9 @@ def main():
         "evaluation_summary": None,
         "messages": [HumanMessage(content=f"Process dataset: {dataset_path}")]
     }
-    
+
     print(f"Processing dataset: {dataset_path}")
-    
+
     # Run the pipeline
     try:
         # Stream the execution to see progress
@@ -404,4 +410,7 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+    import sys
+    # Allow passing dataset path from command line for flexibility
+    dataset_path = sys.argv[1] if len(sys.argv) > 1 else None
+    main(dataset_path)

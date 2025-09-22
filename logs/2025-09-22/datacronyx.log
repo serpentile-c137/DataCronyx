@@ -16,3 +16,37 @@
 2025-09-22 19:51:59,426 [INFO] Titanic sample dataset loaded and session state updated.
 2025-09-22 19:52:16,393 [INFO] Loaded CSV data with shape (1338, 7)
 2025-09-22 19:52:16,394 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:17:56,280 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:17:56,282 [INFO] Home page displayed successfully.
+2025-09-22 20:17:59,149 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:17:59,152 [INFO] Home page displayed successfully.
+2025-09-22 20:18:01,805 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:18:01,809 [INFO] Home page displayed successfully.
+2025-09-22 20:18:01,829 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:18:01,829 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:18:05,988 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:18:05,988 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:18:05,994 [INFO] Identified 3 numerical and 4 categorical columns
+2025-09-22 20:18:06,855 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:18:06,856 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:18:07,001 [INFO] Detected 0 outliers in age using z-score
+2025-09-22 20:18:07,751 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:18:07,752 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:18:26,834 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:18:26,837 [INFO] Home page displayed successfully.
+2025-09-22 20:18:26,842 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:18:26,842 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:19:55,186 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:19:55,188 [INFO] Home page displayed successfully.
+2025-09-22 20:19:59,359 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:19:59,360 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:20:07,118 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:20:07,119 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:22:11,310 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:22:11,311 [INFO] Home page displayed successfully.
+2025-09-22 20:22:15,211 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:22:15,211 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 20:23:06,800 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 20:23:06,803 [INFO] Home page displayed successfully.
+2025-09-22 20:23:06,809 [INFO] Loaded CSV data with shape (1338, 7)
+2025-09-22 20:23:06,810 [INFO] Insurance sample dataset loaded and session state updated.

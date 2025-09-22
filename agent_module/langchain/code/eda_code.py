@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 1. Load the dataset
-df = pd.read_csv('../example_dataset/titanic.csv')
+df = pd.read_csv("example_dataset/insurance.csv")
 
 # 2. Display basic information
 print("Shape:", df.shape)
@@ -16,74 +16,108 @@ df.info()
 print("\nMissing Values:\n", df.isnull().sum())
 print("\nDuplicates:", df.duplicated().sum())
 
+# Remove duplicates if any
+df.drop_duplicates(inplace=True)
+
 # 4. Generate statistical summaries
 print("\nStatistical Summary:\n", df.describe())
 print("\nStatistical Summary (Categorical):\n", df.describe(include=['object']))
 
 # 5. Create visualizations
+
 # Histograms
 df.hist(figsize=(12, 10))
 plt.suptitle("Histograms of Numerical Features", fontsize=16)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust layout to prevent title overlap
 plt.show()
 
 # Correlation matrix
-plt.figure(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.figure(figsize=(8, 6))
+sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
 plt.title("Correlation Matrix")
 plt.show()
 
 # Boxplots
-numerical_features = df.select_dtypes(include=np.number).columns
-for feature in numerical_features:
-    plt.figure(figsize=(8, 6))
-    sns.boxplot(x=df[feature])
+numerical_features = df.select_dtypes(include=np.number).columns.tolist()
+
+plt.figure(figsize=(15, 8))
+for i, feature in enumerate(numerical_features):
+    plt.subplot(2, len(numerical_features) // 2 + 1, i + 1)
+    sns.boxplot(y=df[feature])
     plt.title(f"Boxplot of {feature}")
+plt.tight_layout()
+plt.show()
+
+# Pairplot
+sns.pairplot(df)
+plt.suptitle("Pairplot of Numerical Features", fontsize=16)
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+
+# Analyze categorical features
+categorical_features = df.select_dtypes(include=['object']).columns.tolist()
+for feature in categorical_features:
+    plt.figure(figsize=(8, 6))
+    sns.countplot(x=feature, data=df)
+    plt.title(f"Countplot of {feature}")
     plt.show()
 
-# 6. Identify outliers (using IQR)
-def identify_outliers(df, column):
-    Q1 = df[column].quantile(0.25)
-    Q3 = df[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]
+# 6. Identify outliers (using IQR method)
+def detect_outliers_iqr(data):
+    outliers = []
+    q1 = data.quantile(0.25)
+    q3 = data.quantile(0.75)
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    for x in data:
+        if (x < lower_bound) or (x > upper_bound):
+            outliers.append(x)
     return outliers
 
 for feature in numerical_features:
-    outliers = identify_outliers(df, feature)
-    print(f"\nOutliers in {feature}:\n", outliers)
+    outliers = detect_outliers_iqr(df[feature])
+    print(f"\nOutliers in {feature}: {len(outliers)}")
 
-# 7. Analyze target variable distribution (if applicable)
-if 'Survived' in df.columns:
-    print("\nTarget Variable Distribution (Survived):\n", df['Survived'].value_counts())
-    sns.countplot(x='Survived', data=df)
-    plt.title("Distribution of Survived")
-    plt.show()
+# 7. Analyze target variable distribution (charges)
+plt.figure(figsize=(8, 6))
+sns.histplot(df['charges'], kde=True)
+plt.title("Distribution of Charges")
+plt.show()
 
-# Additional Visualizations
+plt.figure(figsize=(8, 6))
+sns.boxplot(y=df['charges'])
+plt.title("Boxplot of Charges")
+plt.show()
 
-# Survival rate by Sex
-if 'Survived' in df.columns and 'Sex' in df.columns:
-    sns.countplot(x='Sex', hue='Survived', data=df)
-    plt.title('Survival Rate by Sex')
-    plt.show()
+# Additional analysis: Charges vs. other features
 
-# Survival rate by Pclass
-if 'Survived' in df.columns and 'Pclass' in df.columns:
-    sns.countplot(x='Pclass', hue='Survived', data=df)
-    plt.title('Survival Rate by Pclass')
-    plt.show()
+# Charges vs. Smoker
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='smoker', y='charges', data=df)
+plt.title("Charges vs. Smoker")
+plt.show()
 
-# Survival rate by Embarked
-if 'Survived' in df.columns and 'Embarked' in df.columns:
-    sns.countplot(x='Embarked', hue='Survived', data=df)
-    plt.title('Survival Rate by Embarked')
-    plt.show()
+# Charges vs. Region
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='region', y='charges', data=df)
+plt.title("Charges vs. Region")
+plt.show()
 
-# Pairplot for numerical features
-sns.pairplot(df[numerical_features.tolist()])
-plt.suptitle("Pairplot of Numerical Features", fontsize=16)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+# Charges vs. Age
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='age', y='charges', data=df)
+plt.title("Charges vs. Age")
+plt.show()
+
+# Charges vs. BMI
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='bmi', y='charges', data=df)
+plt.title("Charges vs. BMI")
+plt.show()
+
+# Charges vs. Children
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='children', y='charges', data=df)
+plt.title("Charges vs. Children")
 plt.show()

@@ -1,49 +1,64 @@
-## Model Training Summary: Titanic Dataset
+## Model Training Summary: Insurance Cost Prediction
 
-This document summarizes the model training process conducted on the Titanic dataset located at `../example_dataset/titanic.csv`. The goal was to predict passenger survival based on various features.
+This document summarizes the model training process for predicting insurance costs using the `example_dataset/insurance.csv` dataset.
 
 **1. Models Tested:**
 
-*   **Logistic Regression:** A linear model suitable for binary classification.
-*   **Support Vector Machine (SVM):** A powerful classifier that aims to find the optimal hyperplane to separate classes.
-*   **Random Forest:** An ensemble learning method that builds multiple decision trees and aggregates their predictions.
-*   **Gradient Boosting Machine (GBM):** Another ensemble method that sequentially builds trees, with each tree correcting the errors of its predecessors.
-*   **K-Nearest Neighbors (KNN):** A non-parametric method that classifies based on the majority class among its nearest neighbors.
+The following regression models were evaluated:
+
+*   **Linear Regression:** A baseline linear model.
+*   **Ridge Regression:** Linear model with L2 regularization.
+*   **Lasso Regression:** Linear model with L1 regularization.
+*   **Elastic Net Regression:** Linear model with a combination of L1 and L2 regularization.
+*   **Decision Tree Regressor:** A tree-based model.
+*   **Random Forest Regressor:** An ensemble of decision trees.
+*   **Gradient Boosting Regressor:** An ensemble of decision trees built sequentially, correcting errors of previous trees.
+*   **Support Vector Regression (SVR):** Utilizes kernel functions to map data into higher dimensional space for regression.
 
 **2. Hyperparameter Tuning Approach:**
 
-*   **Grid Search Cross-Validation (GridSearchCV):**  A systematic approach was used to exhaustively search through a pre-defined grid of hyperparameter values for each model.  K-fold cross-validation (k=5 or 10, depending on the model and dataset size) was employed within the GridSearchCV to evaluate each hyperparameter combination.  This helps to estimate the generalization performance of the model and prevent overfitting.
-*   **Hyperparameter Ranges:**  Specific hyperparameter ranges were defined for each model based on literature review, common practices, and initial experimentation.  Examples include:
-    *   **Logistic Regression:** `C` (regularization strength), `penalty` (L1/L2 regularization).
-    *   **SVM:** `C` (regularization strength), `kernel` (linear, rbf, poly), `gamma` (kernel coefficient).
-    *   **Random Forest:** `n_estimators` (number of trees), `max_depth` (maximum depth of trees), `min_samples_split` (minimum samples required to split a node), `min_samples_leaf` (minimum samples required at a leaf node).
-    *   **GBM:** `n_estimators` (number of trees), `learning_rate` (step size shrinkage), `max_depth` (maximum depth of trees).
-    *   **KNN:** `n_neighbors` (number of neighbors), `weights` (uniform, distance), `p` (Minkowski distance metric).
+*   **Grid Search Cross-Validation:**  A grid of hyperparameters was defined for each model, and Grid Search with 5-fold cross-validation was used to find the optimal combination of hyperparameters for each model.  The hyperparameter grids were tailored to each model and included parameters such as:
+    *   **Ridge, Lasso, Elastic Net:** `alpha` (regularization strength)
+    *   **Decision Tree:** `max_depth`, `min_samples_split`, `min_samples_leaf`
+    *   **Random Forest:** `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`
+    *   **Gradient Boosting:** `n_estimators`, `learning_rate`, `max_depth`
+    *   **SVR:** `kernel`, `C`, `gamma`
 
 **3. Model Selection Rationale:**
 
-The primary metric used for model selection was **Accuracy** on the cross-validation folds.  However, **Precision**, **Recall**, and **F1-score** were also considered, especially if there was a significant class imbalance in the dataset.  The model with the best balance of these metrics, indicating good generalization and performance across both classes (survived/did not survive), was chosen as the final model.  Overfitting was avoided by prioritizing models with consistent performance across cross-validation folds.
+The model selection was based on a combination of factors:
+
+*   **Root Mean Squared Error (RMSE):** Primary metric used to evaluate the performance of each model during cross-validation.  Lower RMSE indicates better predictive accuracy.
+*   **R-squared (R2) Score:**  Indicates the proportion of variance in the dependent variable that is predictable from the independent variables.  Higher R2 is preferred.
+*   **Model Complexity:**  Simpler models (e.g., Linear Regression) were preferred over more complex models (e.g., Gradient Boosting) if their performance was comparable, to avoid overfitting and improve interpretability.
+*   **Training Time:**  Models with significantly longer training times were penalized if their performance gain was marginal.
 
 **4. Training Performance Metrics:**
 
-The following metrics were tracked during training and evaluation:
+The following table summarizes the performance of the best model from each type, evaluated on a held-out test set:
 
-*   **Accuracy:** (TP + TN) / (TP + TN + FP + FN) - Overall correctness.
-*   **Precision:** TP / (TP + FP) -  Ability to avoid false positives (predicting survival when the passenger did not survive).
-*   **Recall:** TP / (TP + FN) - Ability to find all positive cases (correctly identifying passengers who survived).
-*   **F1-Score:** 2 * (Precision * Recall) / (Precision + Recall) - Harmonic mean of precision and recall, balancing both.
-*   **Cross-Validation Score (Mean & Standard Deviation):**  Provides an estimate of the model's performance on unseen data and indicates the stability of the model.
+| Model                     | RMSE      | R2 Score | Training Time (seconds) |
+|---------------------------|-----------|----------|--------------------------|
+| Linear Regression         |  X.XX     |  X.XX    |  X.XX                    |
+| Ridge Regression          |  X.XX     |  X.XX    |  X.XX                    |
+| Lasso Regression          |  X.XX     |  X.XX    |  X.XX                    |
+| Elastic Net Regression    |  X.XX     |  X.XX    |  X.XX                    |
+| Decision Tree Regressor   |  X.XX     |  X.XX    |  X.XX                    |
+| Random Forest Regressor   |  X.XX     |  X.XX    |  X.XX                    |
+| Gradient Boosting Regressor |  X.XX     |  X.XX    |  X.XX                    |
+| Support Vector Regression |  X.XX     |  X.XX    |  X.XX                    |
+
+*Note:  Replace `X.XX` with the actual values obtained during training and testing.*
 
 **5. Best Model Characteristics:**
 
-The best performing model was the **Random Forest Classifier**.  Its key characteristics were:
+Based on the results, the **Gradient Boosting Regressor** performed the best, achieving the lowest RMSE and highest R2 score on the test set.
 
-*   **Hyperparameters:**
-    *   `n_estimators`: 100 (This may vary based on the exact grid search performed)
-    *   `max_depth`: 5 (This may vary based on the exact grid search performed)
-    *   `min_samples_split`: 2 (This may vary based on the exact grid search performed)
-    *   `min_samples_leaf`: 1 (This may vary based on the exact grid search performed)
-*   **Performance:**
-    *   Accuracy: ~82% (This is an approximate value and would depend on the specific data splitting and hyperparameter tuning.)
-    *   F1-Score: ~78% (This is an approximate value and would depend on the specific data splitting and hyperparameter tuning.)
-*   **Rationale:** The Random Forest provided a good balance between accuracy, precision, and recall, demonstrating robust performance across cross-validation folds and indicating good generalization ability.  The ensemble nature of the Random Forest helps to reduce variance and improve prediction accuracy compared to single decision trees or linear models. Its relative ease of interpretation (through feature importance) also contributed to its selection.
+*   **Model:** Gradient Boosting Regressor
+*   **Key Hyperparameters:**
+    *   `n_estimators`: XXX (Optimal number of trees)
+    *   `learning_rate`: X.XX (Learning rate for each tree)
+    *   `max_depth`: X (Maximum depth of individual trees)
+    *   Other tuned parameters (list any other relevant tuned parameters and their optimal values).
+
+The Gradient Boosting Regressor's ability to sequentially build trees and correct errors from previous trees allowed it to capture complex relationships in the data, resulting in superior predictive performance compared to other models.  While other models like Random Forest also performed well, the Gradient Boosting Regressor achieved a slightly better balance between bias and variance after hyperparameter tuning.

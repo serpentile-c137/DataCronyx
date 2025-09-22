@@ -3,100 +3,80 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_curve, auc
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder, StandardScaler
 import shap
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.ensemble import RandomForestRegressor  # Example model, adjust as needed
+
+# Load the dataset
+data = pd.read_csv("example_dataset/insurance.csv")
+
+# Preprocessing (adjust as needed based on your original notebook)
+le = LabelEncoder()
+data['sex'] = le.fit_transform(data['sex'])
+data['smoker'] = le.fit_transform(data['smoker'])
+data['region'] = le.fit_transform(data['region'])
+
+X = data.drop('charges', axis=1)
+y = data['charges']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
 
 # Load the model
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-# Load the dataset
-data = pd.read_csv('../example_dataset/titanic.csv')
-
-# Preprocessing
-data['Age'].fillna(data['Age'].median(), inplace=True)
-data['Embarked'].fillna(data['Embarked'].mode()[0], inplace=True)
-
-label_encoder = LabelEncoder()
-data['Sex'] = label_encoder.fit_transform(data['Sex'])
-data['Embarked'] = label_encoder.fit_transform(data['Embarked'])
-
-X = data.drop('Survived', axis=1)
-y = data['Survived']
-
-numerical_features = ['Age', 'Fare', 'Pclass', 'SibSp', 'Parch']
-scaler = StandardScaler()
-X[numerical_features] = scaler.fit_transform(X[numerical_features])
-
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
 # Generate predictions
 y_pred = model.predict(X_test)
 
-# Calculate evaluation metrics
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy}")
+# Calculate regression metrics
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
-# Classification Report
-print("Classification Report:")
-print(classification_report(y_test, y_pred))
+print("Regression Metrics:")
+print(f"MSE: {mse}")
+print(f"RMSE: {rmse}")
+print(f"MAE: {mae}")
+print(f"R2 Score: {r2}")
 
-# Confusion Matrix
-conf_matrix = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix:")
-print(conf_matrix)
 
-sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
-
-# ROC Curve and AUC (if applicable)
+# Feature Importance (if applicable and if the model supports it)
 try:
-    y_prob = model.predict_proba(X_test)[:, 1]
-    fpr, tpr, thresholds = roc_curve(y_test, y_prob)
-    roc_auc = auc(fpr, tpr)
+    if hasattr(model, 'feature_importances_'):
+        feature_importances = model.feature_importances_
+        feature_names = X.columns
+        importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances})
+        importance_df = importance_df.sort_values('Importance', ascending=False)
 
-    plt.figure()
-    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic')
-    plt.legend(loc="lower right")
-    plt.show()
-except AttributeError:
-    print("Model does not have predict_proba method, skipping ROC curve and AUC.")
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x='Importance', y='Feature', data=importance_df)
+        plt.title('Feature Importance')
+        plt.show()
+except Exception as e:
+    print(f"Feature Importance could not be calculated: {e}")
 
-# Feature Importance Visualization
-try:
-    importances = model.feature_importances_
-    feature_names = X.columns
-    feature_importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': importances})
-    feature_importance_df = feature_importance_df.sort_values('Importance', ascending=False)
 
-    plt.figure(figsize=(10, 6))
-    plt.bar(feature_importance_df['Feature'], feature_importance_df['Importance'])
-    plt.xticks(rotation=45, ha='right')
-    plt.title('Feature Importance')
-    plt.xlabel('Feature')
-    plt.ylabel('Importance')
-    plt.tight_layout()
-    plt.show()
-except AttributeError:
-    print("Model does not have feature_importances_ attribute, skipping feature importance plot.")
-
-# Model interpretation with SHAP values
+# SHAP Values (model interpretation)
 try:
     explainer = shap.Explainer(model, X_train)
     shap_values = explainer(X_test)
 
-    shap.summary_plot(shap_values, X_test)
+    # Summary plot
+    shap.summary_plot(shap_values, X_test, feature_names=X.columns)
+
+    # Individual force plot (example - first prediction)
+    shap.force_plot(explainer.expected_value, shap_values[0,:], X_test.iloc[0,:], feature_names=X.columns, show=False).savefig('force_plot.png')
+    plt.show()
 except Exception as e:
-    print(f"SHAP value calculation failed: {e}")
+    print(f"SHAP values could not be calculated: {e}")
 ```
