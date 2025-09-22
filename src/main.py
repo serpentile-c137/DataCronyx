@@ -573,13 +573,11 @@ else:
         # Determine dataset path for agent
         agent_dataset_path = None
         if uploaded_file:
-            # Save uploaded file to a temp location and use its path
             temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv" if file_type == "CSV" else ".xlsx")
             temp_file.write(uploaded_file.read())
             temp_file.close()
             agent_dataset_path = temp_file.name
         elif file_type == "SQL" and sql_connection is not None and sql_query and df is not None:
-            # Save SQL-loaded DataFrame to temp CSV
             temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv")
             df.to_csv(temp_file.name, index=False)
             agent_dataset_path = temp_file.name
@@ -588,44 +586,46 @@ else:
         elif sample_dataset == "Insurance (Regression)":
             agent_dataset_path = str(pathlib.Path(__file__).parent.parent / "example_dataset" / "insurance.csv")
 
-        # Button to run agent pipeline and regenerate outputs
+        # Use session state to track if agent pipeline has been run
+        if "agent_pipeline_run" not in st.session_state:
+            st.session_state.agent_pipeline_run = False
+
         if st.button("Run Agent Pipeline"):
             agent_path = pathlib.Path(__file__).parent.parent / "agent_module" / "langchain" / "agent.py"
             spec = importlib.util.spec_from_file_location("agent", str(agent_path))
             agent_module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(agent_module)
-            # Pass dataset path to agent
             agent_module.main(agent_dataset_path)
+            st.session_state.agent_pipeline_run = True
             st.success("Agent pipeline completed. Outputs regenerated.")
 
         tab_labels = [step[0] for step in agent_steps]
         tabs = st.tabs(tab_labels)
         for i, (step_name, code_file, summary_file) in enumerate(agent_steps):
             with tabs[i]:
-                st.header(f"{step_name}")
-
-                # Show summary
-                summary_path = summary_dir / summary_file
-                if summary_path.exists():
-                    with open(summary_path, "r", encoding="utf-8") as f:
-                        summary_content = f.read()
-                    st.subheader(f"{step_name} Summary")
-                    st.markdown(summary_content)
+                if not st.session_state.agent_pipeline_run:
+                    st.info("Run Agent Pipeline to view code and summary.")
                 else:
-                    st.info(f"No summary generated for {step_name} yet.")
+                    st.header(f"{step_name}")
 
-                # Show code
-                code_path = code_dir / code_file
-                if code_path.exists():
-                    with open(code_path, "r", encoding="utf-8") as f:
-                        code_content = f.read()
-                    st.subheader(f"{step_name} Code")
-                    st.code(code_content, language="python")
-                else:
-                    st.info(f"No code generated for {step_name} yet.")
+                    # Show summary
+                    summary_path = summary_dir / summary_file
+                    if summary_path.exists():
+                        with open(summary_path, "r", encoding="utf-8") as f:
+                            summary_content = f.read()
+                        st.subheader(f"{step_name} Summary")
+                        st.markdown(summary_content)
+                    else:
+                        st.info(f"No summary generated for {step_name} yet.")
+
+                    # Show code
+                    code_path = code_dir / code_file
+                    if code_path.exists():
+                        with open(code_path, "r", encoding="utf-8") as f:
+                            code_content = f.read()
+                        st.subheader(f"{step_name} Code")
+                        st.code(code_content, language="python")
+                    else:
+                        st.info(f"No code generated for {step_name} yet.")
 
                 
-
-        # st.markdown("---")
-        # st.markdown("To regenerate these outputs, run the agent pipeline script (`agent.py`).")
-

@@ -50,3 +50,7 @@
 2025-09-22 20:23:06,803 [INFO] Home page displayed successfully.
 2025-09-22 20:23:06,809 [INFO] Loaded CSV data with shape (1338, 7)
 2025-09-22 20:23:06,810 [INFO] Insurance sample dataset loaded and session state updated.
+2025-09-22 21:26:16,466 [INFO] Custom dark theme CSS generated successfully.
+2025-09-22 21:26:16,468 [INFO] Home page displayed successfully.
+2025-09-22 21:26:23,257 [INFO] Loaded CSV data with shape (691, 16)
+2025-09-22 21:26:23,258 [INFO] Uploaded file loaded and session state updated.
