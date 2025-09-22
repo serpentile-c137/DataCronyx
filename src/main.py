@@ -71,14 +71,15 @@ st.title("Welcome to DataCronyx")
 
 selected = st.sidebar.radio(
     "Navigation",
-    options=['Home', 'Custom EDA', 'Data Preprocessing', 'Feature Engineering', 'Model Training'],
+    options=['Home', 'Custom EDA', 'Data Preprocessing', 'Feature Engineering', 'Model Training', 'Agent Pipeline'],
     index=0,
     format_func=lambda x: {
         'Home': '🏠 Home',
         'Custom EDA': '📊 Custom EDA',
         'Data Preprocessing': '🛠️ Data Preprocessing',
         'Feature Engineering': '✨ Feature Engineering',
-        'Model Training': '🤖 Model Training'
+        'Model Training': '🤖 Model Training',
+        'Agent Pipeline': '🧑‍💻 Agent Pipeline'
     }[x]
 )
 
@@ -549,4 +550,50 @@ else:
         except Exception as e:
             st.error(f"Error in Model Training: {e}")
             logging.error(f"Error in Model Training: {e}")
+
+    # AGENT PIPELINE TAB
+    if selected == 'Agent Pipeline':
+        st.title("Agent Pipeline: Automated ML Workflow")
+        st.markdown("This section displays the outputs of the agent-powered ML pipeline. Each step includes generated code and a markdown summary.")
+
+        import pathlib
+
+        agent_steps = [
+            ("EDA", "eda_code.py", "eda_summary.md"),
+            ("Preprocessing", "preprocess_code.py", "preprocess_summary.md"),
+            ("Feature Engineering", "feature_code.py", "feature_summary.md"),
+            ("Training", "train_code.py", "train_summary.md"),
+            ("Evaluation", "eval_code.py", "eval_summary.md"),
+        ]
+        code_dir = pathlib.Path(__file__).parent.parent / "agent_module" / "langchain" / "code"
+        summary_dir = pathlib.Path(__file__).parent.parent / "agent_module" / "langchain" / "summary"
+
+        tab_labels = [step[0] for step in agent_steps]
+        tabs = st.tabs(tab_labels)
+        for i, (step_name, code_file, summary_file) in enumerate(agent_steps):
+            with tabs[i]:
+                st.header(f"{step_name}")
+                
+                # Show summary
+                summary_path = summary_dir / summary_file
+                if summary_path.exists():
+                    with open(summary_path, "r", encoding="utf-8") as f:
+                        summary_content = f.read()
+                    st.subheader(f"{step_name} Summary")
+                    st.markdown(summary_content)
+                else:
+                    st.info(f"No summary generated for {step_name} yet.")
+
+                # Show code
+                code_path = code_dir / code_file
+                if code_path.exists():
+                    with open(code_path, "r", encoding="utf-8") as f:
+                        code_content = f.read()
+                    st.subheader(f"{step_name} Code")
+                    st.code(code_content, language="python")
+                else:
+                    st.info(f"No code generated for {step_name} yet.")
+
+        # st.markdown("---")
+        # st.markdown("To regenerate these outputs, run the agent pipeline script (`agent.py`).")
 
