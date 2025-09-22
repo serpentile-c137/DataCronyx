@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 from pathlib import Path
 from typing import TypedDict, Optional, Annotated
 import json
+from datetime import datetime
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
 from langgraph.graph import StateGraph, START, END
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -48,16 +51,20 @@ def save_to_file(content: str, filepath: str, is_markdown: bool = False):
     """
     import os
     # Remove existing file if present
-    if os.path.exists(filepath):
-        os.remove(filepath)
-    if is_markdown:
-        # Extract content between ```markdown and ```
-        import re
-        match = re.search(r"```markdown\s*(.*?)\s*```", content, re.DOTALL)
-        if match:
-            content = match.group(1).strip()
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(content)
+    try:
+        if os.path.exists(filepath):
+            os.remove(filepath)
+        if is_markdown:
+            # Extract content between ```markdown and ```
+            import re
+            match = re.search(r"```markdown\s*(.*?)\s*```", content, re.DOTALL)
+            if match:
+                content = match.group(1).strip()
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        logging.info(f"Saved file: {filepath}")
+    except Exception as e:
+        logging.error(f"Error saving file {filepath}: {e}")
 
 def eda_node(state: MLAgentState) -> MLAgentState:
     """Perform EDA analysis and generate code"""
@@ -80,12 +87,6 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     Generate ONLY the Python code, no explanations. Make sure the code is complete and executable. Also exclude ```python and ```, include only python code between them.
     """)
     
-    eda_code_chain = eda_prompt | llm | StrOutputParser()
-    eda_code = eda_code_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    # Save EDA code
-    save_to_file(eda_code, "agent_module/langchain/code/eda_code.py")
-    
     # EDA Summary Generation
     summary_prompt = ChatPromptTemplate.from_template("""
     You are an expert data scientist. Based on the EDA code for dataset: {dataset_path}
@@ -101,11 +102,19 @@ def eda_node(state: MLAgentState) -> MLAgentState:
     Write in Markdown format with proper headers and formatting.
     """)
     
-    summary_chain = summary_prompt | llm | StrOutputParser()
-    eda_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    # Save EDA summary
-    save_to_file(eda_summary, "agent_module/langchain/summary/eda_summary.md", is_markdown=True)
+    try:
+        eda_code_chain = eda_prompt | llm | StrOutputParser()
+        eda_code = eda_code_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(eda_code, "agent_module/langchain/code/eda_code.py")
+        logging.info("EDA code generated and saved.")
+
+        summary_chain = summary_prompt | llm | StrOutputParser()
+        eda_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(eda_summary, "agent_module/langchain/summary/eda_summary.md", is_markdown=True)
+        logging.info("EDA summary generated and saved.")
+    except Exception as e:
+        logging.error(f"Error in EDA node: {e}")
+        raise
     
     return {
         **state,
@@ -135,11 +144,6 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     Previous EDA insights should guide your preprocessing decisions.
     """)
     
-    prep_code_chain = prep_prompt | llm | StrOutputParser()
-    prep_code = prep_code_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(prep_code, "agent_module/langchain/code/preprocess_code.py")
-    
     # Preprocessing summary
     summary_prompt = ChatPromptTemplate.from_template("""
     Generate a Markdown summary explaining the preprocessing rationale for dataset: {dataset_path}
@@ -153,10 +157,19 @@ def preprocessing_node(state: MLAgentState) -> MLAgentState:
     Write in Markdown format.
     """)
     
-    summary_chain = summary_prompt | llm | StrOutputParser()
-    prep_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(prep_summary, "agent_module/langchain/summary/preprocess_summary.md", is_markdown=True)
+    try:
+        prep_code_chain = prep_prompt | llm | StrOutputParser()
+        prep_code = prep_code_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(prep_code, "agent_module/langchain/code/preprocess_code.py")
+        logging.info("Preprocessing code generated and saved.")
+
+        summary_chain = summary_prompt | llm | StrOutputParser()
+        prep_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(prep_summary, "agent_module/langchain/summary/preprocess_summary.md", is_markdown=True)
+        logging.info("Preprocessing summary generated and saved.")
+    except Exception as e:
+        logging.error(f"Error in preprocessing node: {e}")
+        raise
     
     return {
         **state,
@@ -184,11 +197,6 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
-    feat_code_chain = feat_prompt | llm | StrOutputParser()
-    feat_code = feat_code_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(feat_code, "agent_module/langchain/code/feature_code.py")
-    
     # Feature engineering summary
     summary_prompt = ChatPromptTemplate.from_template("""
     Generate a Markdown summary for feature engineering on dataset: {dataset_path}
@@ -202,10 +210,19 @@ def feature_engineering_node(state: MLAgentState) -> MLAgentState:
     Write in Markdown format. Save only the content between ```markdown and ```. Do not include the ```markdown tags themselves.
     """)
     
-    summary_chain = summary_prompt | llm | StrOutputParser()
-    feat_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(feat_summary, "agent_module/langchain/summary/feature_summary.md", is_markdown=True)
+    try:
+        feat_code_chain = feat_prompt | llm | StrOutputParser()
+        feat_code = feat_code_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(feat_code, "agent_module/langchain/code/feature_code.py")
+        logging.info("Feature engineering code generated and saved.")
+
+        summary_chain = summary_prompt | llm | StrOutputParser()
+        feat_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(feat_summary, "agent_module/langchain/summary/feature_summary.md", is_markdown=True)
+        logging.info("Feature engineering summary generated and saved.")
+    except Exception as e:
+        logging.error(f"Error in feature engineering node: {e}")
+        raise
     
     return {
         **state,
@@ -234,11 +251,6 @@ def training_node(state: MLAgentState) -> MLAgentState:
     Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
-    train_code_chain = train_prompt | llm | StrOutputParser()
-    train_code = train_code_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(train_code, "agent_module/langchain/code/train_code.py")
-    
     # Training summary
     summary_prompt = ChatPromptTemplate.from_template("""
     Generate a Markdown summary for model training on dataset: {dataset_path}
@@ -253,10 +265,19 @@ def training_node(state: MLAgentState) -> MLAgentState:
     Write in Markdown format.
     """)
     
-    summary_chain = summary_prompt | llm | StrOutputParser()
-    train_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(train_summary, "agent_module/langchain/summary/train_summary.md", is_markdown=True)
+    try:
+        train_code_chain = train_prompt | llm | StrOutputParser()
+        train_code = train_code_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(train_code, "agent_module/langchain/code/train_code.py")
+        logging.info("Training code generated and saved.")
+
+        summary_chain = summary_prompt | llm | StrOutputParser()
+        train_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(train_summary, "agent_module/langchain/summary/train_summary.md", is_markdown=True)
+        logging.info("Training summary generated and saved.")
+    except Exception as e:
+        logging.error(f"Error in training node: {e}")
+        raise
     
     return {
         **state,
@@ -286,11 +307,6 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     Generate ONLY the Python code, no explanations. Also exclude ```python and ```, include only python code between them.
     """)
     
-    eval_code_chain = eval_prompt | llm | StrOutputParser()
-    eval_code = eval_code_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(eval_code, "agent_module/langchain/code/eval_code.py")
-    
     # Evaluation summary
     summary_prompt = ChatPromptTemplate.from_template("""
     Generate a Markdown summary for model evaluation on dataset: {dataset_path}
@@ -306,10 +322,19 @@ def evaluation_node(state: MLAgentState) -> MLAgentState:
     Write in Markdown format.
     """)
     
-    summary_chain = summary_prompt | llm | StrOutputParser()
-    eval_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
-    
-    save_to_file(eval_summary, "agent_module/langchain/summary/eval_summary.md", is_markdown=True)
+    try:
+        eval_code_chain = eval_prompt | llm | StrOutputParser()
+        eval_code = eval_code_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(eval_code, "agent_module/langchain/code/eval_code.py")
+        logging.info("Evaluation code generated and saved.")
+
+        summary_chain = summary_prompt | llm | StrOutputParser()
+        eval_summary = summary_chain.invoke({"dataset_path": state["dataset_path"]})
+        save_to_file(eval_summary, "agent_module/langchain/summary/eval_summary.md", is_markdown=True)
+        logging.info("Evaluation summary generated and saved.")
+    except Exception as e:
+        logging.error(f"Error in evaluation node: {e}")
+        raise
     
     return {
         **state,
@@ -346,6 +371,7 @@ def build_ml_pipeline():
 def main(dataset_path: str = None):
     """Main execution function. Accepts dataset_path as argument."""
     print("Starting ML Pipeline with LangGraph...")
+    logging.info("Starting ML Pipeline with LangGraph...")
 
     # Create output directories
     create_output_directories()
@@ -357,10 +383,10 @@ def main(dataset_path: str = None):
     # If called from Streamlit, dataset_path will be provided (uploaded file, SQL export, or example)
     # If not provided, default to Titanic
     if not dataset_path or not os.path.exists(dataset_path):
-        print("No valid dataset path provided. Using default Titanic dataset.")
+        logging.warning("No valid dataset path provided. Using default Titanic dataset.")
         dataset_path = "../example_dataset/titanic.csv"
     else:
-        print(f"Using dataset: {dataset_path}")
+        logging.info(f"Using dataset: {dataset_path}")
 
     # Initial state
     initial_state = {
@@ -380,6 +406,7 @@ def main(dataset_path: str = None):
     }
 
     print(f"Processing dataset: {dataset_path}")
+    logging.info(f"Processing dataset: {dataset_path}")
 
     # Run the pipeline
     try:
@@ -388,26 +415,46 @@ def main(dataset_path: str = None):
             for node_name, node_output in step_output.items():
                 current_step = node_output.get("current_step", "unknown")
                 print(f"✅ Completed: {node_name} -> Next: {current_step}")
-        
+                logging.info(f"Completed: {node_name} -> Next: {current_step}")
+
         print("\n🎉 Pipeline complete! All agent outputs saved in:")
+        logging.info("Pipeline complete! All agent outputs saved.")
+
         print("  📁 /code (Python files)")
         print("  📁 /summary (Markdown files)")
-        
-        # List generated files
+
         code_files = list(Path("code").glob("*.py"))
         summary_files = list(Path("summary").glob("*.md"))
-        
+
         print("\n📋 Generated files:")
         print("Code files:")
         for file in code_files:
             print(f"  - {file}")
+            logging.info(f"Generated code file: {file}")
         print("Summary files:")
         for file in summary_files:
             print(f"  - {file}")
-            
+            logging.info(f"Generated summary file: {file}")
+
     except Exception as e:
         print(f"❌ Pipeline failed with error: {str(e)}")
+        logging.error(f"Pipeline failed with error: {str(e)}")
         raise
+
+# Setup logging for agent module (date-wise, same as other modules)
+log_date = datetime.now().strftime("%Y-%m-%d")
+log_dir = os.path.join(os.path.dirname(__file__), '../../logs', log_date)
+os.makedirs(log_dir, exist_ok=True)
+logfile_path = os.path.join(log_dir, 'datacronyx.log')
+if not any(isinstance(h, TimedRotatingFileHandler) and getattr(h, 'baseFilename', None) == logfile_path for h in logging.getLogger().handlers):
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            TimedRotatingFileHandler(logfile_path, when="midnight", backupCount=30, encoding='utf-8')
+        ]
+    )
 
 if __name__ == "__main__":
     import sys
