@@ -47,7 +47,12 @@ def save_to_file(content: str, filepath: str, is_markdown: bool = False):
     """
     Save content to file inside agent_module/langchain/.
     If is_markdown is True, save only the content between ```markdown and ```, excluding the tags.
+    Always overwrite any existing file.
     """
+    import os
+    # Remove existing file if present
+    if os.path.exists(filepath):
+        os.remove(filepath)
     if is_markdown:
         # Extract content between ```markdown and ```
         import re
