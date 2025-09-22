@@ -1,104 +1,110 @@
 import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score, KFold, StratifiedKFold, GridSearchCV, RandomizedSearchCV
-from sklearn.preprocessing import StandardScaler, QuantileTransformer
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from xgboost import XGBRegressor, XGBClassifier
+from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV, RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pickle
-import warnings
-warnings.filterwarnings('ignore')
+import time
+import numpy as np
 
-# Load data
-data = pd.read_csv("example_dataset/insurance.csv")
+# Load the data
+data = pd.read_csv('/var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmp3k4x9s2m.csv')
 
-# Preprocessing & Feature Engineering
-data['age_squared'] = data['age']**2
-data['bmi_squared'] = data['bmi']**2
-data['age_bmi_interaction'] = data['age'] * data['bmi']
-data['children_squared'] = data['children']**2
-data['children_age_interaction'] = data['children'] * data['age']
+# Separate features and target variable
+X = data.drop('target', axis=1)
+y = data['target']
 
-data = pd.get_dummies(data, columns=['sex', 'smoker', 'region'], drop_first=True)
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-X = data.drop('charges', axis=1)
-y = data['charges']
-
-# Scaling
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-
-# --- Regression Models ---
+# Define models
 models = {
-    'RandomForestRegressor': (RandomForestRegressor(), {'n_estimators': [100, 200], 'max_depth': [5, 10]}),
-    'XGBRegressor': (XGBRegressor(), {'n_estimators': [100, 200], 'max_depth': [3, 5], 'learning_rate': [0.1, 0.01]})
+    'RandomForest': RandomForestClassifier(random_state=42),
+    'XGBoost': XGBClassifier(random_state=42, use_label_encoder=False, eval_metric='logloss'),
+    'LogisticRegression': LogisticRegression(random_state=42, solver='liblinear')
 }
 
+# Define hyperparameter grids
+param_grids = {
+    'RandomForest': {
+        'n_estimators': [100, 200, 300],
+        'max_depth': [4, 6, 8],
+        'min_samples_split': [2, 4],
+        'min_samples_leaf': [1, 2]
+    },
+    'XGBoost': {
+        'n_estimators': [100, 200, 300],
+        'max_depth': [3, 4, 5],
+        'learning_rate': [0.1, 0.01, 0.05],
+        'subsample': [0.8, 1.0],
+        'colsample_bytree': [0.8, 1.0]
+    },
+    'LogisticRegression': {
+        'C': [0.1, 1.0, 10.0],
+        'penalty': ['l1', 'l2']
+    }
+}
+
+# Model training and evaluation
 best_model = None
-best_score = float('-inf')
-best_model_name = None
+best_accuracy = 0
+results = {}
 
-for model_name, (model, param_grid) in models.items():
-    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='r2', n_jobs=-1)
-    grid_search.fit(X_train, y_train)
+for name, model in models.items():
+    print(f"Training {name}...")
+    start_time = time.time()
+
+    # Hyperparameter tuning using RandomizedSearchCV
+    param_grid = param_grids[name]
+    random_search = RandomizedSearchCV(model, param_grid, cv=3, scoring='accuracy', n_iter=10, random_state=42, n_jobs=-1)
+    random_search.fit(X_train, y_train)
     
-    if grid_search.best_score_ > best_score:
-        best_score = grid_search.best_score_
-        best_model = grid_search.best_estimator_
-        best_model_name = model_name
+    # Get the best model from RandomizedSearchCV
+    best_model_rs = random_search.best_estimator_
 
-print(f"Best Regression Model: {best_model_name} with R2 score: {best_score}")
+    # Cross-validation
+    cv_scores = cross_val_score(best_model_rs, X_train, y_train, cv=5, scoring='accuracy')
+    print(f"Cross-validation accuracy: {cv_scores.mean():.4f}")
 
-# Evaluate best regression model on test set
-y_pred = best_model.predict(X_test)
-r2 = r2_score(y_test, y_pred)
-rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-print(f"Test R2: {r2}, RMSE: {rmse}")
-
-# --- Classification Models (Dummy target for demonstration) ---
-#Creating a dummy classification target
-y_class = (data['charges'] > data['charges'].median()).astype(int)
-X_class = data.drop('charges', axis=1)
-X_class_scaled = scaler.fit_transform(X_class)
-X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_class_scaled, y_class, test_size=0.2, random_state=42)
-
-
-classification_models = {
-    'LogisticRegression': (LogisticRegression(), {'C': [0.1, 1.0], 'solver': ['liblinear']}),
-    'RandomForestClassifier': (RandomForestClassifier(), {'n_estimators': [50, 100], 'max_depth': [5, 10]}),
-    'XGBClassifier': (XGBClassifier(), {'n_estimators': [50, 100], 'max_depth': [3, 5], 'learning_rate': [0.1, 0.01]})
-}
-
-best_class_model = None
-best_class_score = float('-inf')
-best_class_model_name = None
-
-for model_name, (model, param_grid) in classification_models.items():
-    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
-    grid_search.fit(X_train_class, y_train_class)
+    # Prediction and evaluation on the test set
+    y_pred = best_model_rs.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Test accuracy: {accuracy:.4f}")
     
-    if grid_search.best_score_ > best_class_score:
-        best_class_score = grid_search.best_score_
-        best_class_model = grid_search.best_estimator_
-        best_class_model_name = model_name
+    # Store results
+    results[name] = {
+        'accuracy': accuracy,
+        'cv_accuracy': cv_scores.mean(),
+        'classification_report': classification_report(y_test, y_pred),
+        'confusion_matrix': confusion_matrix(y_test, y_pred),
+        'model': best_model_rs
+    }
 
-print(f"Best Classification Model: {best_class_model_name} with Accuracy: {best_class_score}")
+    end_time = time.time()
+    print(f"Training time: {end_time - start_time:.2f} seconds")
 
-# Evaluate best classification model on test set
-y_pred_class = best_class_model.predict(X_test_class)
-accuracy = accuracy_score(y_test_class, y_pred_class)
-precision = precision_score(y_test_class, y_pred_class)
-recall = recall_score(y_test_class, y_pred_class)
-f1 = f1_score(y_test_class, y_pred_class)
-roc_auc = roc_auc_score(y_test_class, best_class_model.predict_proba(X_test_class)[:, 1])
+    # Select the best model based on test accuracy
+    if accuracy > best_accuracy:
+        best_accuracy = accuracy
+        best_model = best_model_rs
 
-print(f"Test Accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1: {f1}, ROC AUC: {roc_auc}")
+# Print results
+print("\nResults:")
+for name, result in results.items():
+    print(f"Model: {name}")
+    print(f"Cross-validation Accuracy: {result['cv_accuracy']:.4f}")
+    print(f"Test Accuracy: {result['accuracy']:.4f}")
+    print("Classification Report:\n", result['classification_report'])
+    print("Confusion Matrix:\n", result['confusion_matrix'])
+    print("-" * 50)
 
-
-# Save the best regression model
-with open('model.pkl', 'wb') as file:
-    pickle.dump(best_model, file)
+# Save the best model
+if best_model is not None:
+    with open('model.pkl', 'wb') as file:
+        pickle.dump(best_model, file)
+    print("Best model saved as 'model.pkl'")
+else:
+    print("No model was trained.")

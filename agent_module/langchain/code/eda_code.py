@@ -4,120 +4,70 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 1. Load the dataset
-df = pd.read_csv("example_dataset/insurance.csv")
+df = pd.read_csv('/var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmp3k4x9s2m.csv')
 
 # 2. Display basic information
 print("Shape:", df.shape)
-print("\nData Types:\n", df.dtypes)
-print("\nInfo:")
-df.info()
+print("\nData types:\n", df.dtypes)
+print("\nInfo:\n", df.info())
 
 # 3. Check for missing values and duplicates
-print("\nMissing Values:\n", df.isnull().sum())
-print("\nDuplicates:", df.duplicated().sum())
+print("\nMissing values:\n", df.isnull().sum())
+print("\nDuplicated rows:", df.duplicated().sum())
 
 # Remove duplicates if any
 df.drop_duplicates(inplace=True)
 
 # 4. Generate statistical summaries
-print("\nStatistical Summary:\n", df.describe())
-print("\nStatistical Summary (Categorical):\n", df.describe(include=['object']))
+print("\nStatistical summary:\n", df.describe())
 
 # 5. Create visualizations
-
-# Histograms
+# Histograms for numerical features
 df.hist(figsize=(12, 10))
 plt.suptitle("Histograms of Numerical Features", fontsize=16)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust layout to prevent title overlap
-plt.show()
-
-# Correlation matrix
-plt.figure(figsize=(8, 6))
-sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
-plt.title("Correlation Matrix")
-plt.show()
-
-# Boxplots
-numerical_features = df.select_dtypes(include=np.number).columns.tolist()
-
-plt.figure(figsize=(15, 8))
-for i, feature in enumerate(numerical_features):
-    plt.subplot(2, len(numerical_features) // 2 + 1, i + 1)
-    sns.boxplot(y=df[feature])
-    plt.title(f"Boxplot of {feature}")
-plt.tight_layout()
-plt.show()
-
-# Pairplot
-sns.pairplot(df)
-plt.suptitle("Pairplot of Numerical Features", fontsize=16)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
 
-# Analyze categorical features
-categorical_features = df.select_dtypes(include=['object']).columns.tolist()
-for feature in categorical_features:
+# Correlation matrix
+plt.figure(figsize=(10, 8))
+corr_matrix = df.corr()
+sns.heatmap(corr_matrix, annot=True, cmap="coolwarm")
+plt.title("Correlation Matrix")
+plt.show()
+
+# Boxplots for numerical features
+for column in df.select_dtypes(include=np.number):
     plt.figure(figsize=(8, 6))
-    sns.countplot(x=feature, data=df)
-    plt.title(f"Countplot of {feature}")
+    sns.boxplot(x=df[column])
+    plt.title(f"Boxplot of {column}")
     plt.show()
 
 # 6. Identify outliers (using IQR method)
 def detect_outliers_iqr(data):
-    outliers = []
-    q1 = data.quantile(0.25)
-    q3 = data.quantile(0.75)
-    iqr = q3 - q1
-    lower_bound = q1 - 1.5 * iqr
-    upper_bound = q3 + 1.5 * iqr
-    for x in data:
-        if (x < lower_bound) or (x > upper_bound):
-            outliers.append(x)
+    outliers = {}
+    for col in data.select_dtypes(include=np.number):
+        Q1 = data[col].quantile(0.25)
+        Q3 = data[col].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        outliers[col] = data[(data[col] < lower_bound) | (data[col] > upper_bound)][col].index.tolist()
     return outliers
 
-for feature in numerical_features:
-    outliers = detect_outliers_iqr(df[feature])
-    print(f"\nOutliers in {feature}: {len(outliers)}")
+outliers = detect_outliers_iqr(df)
+print("\nOutliers (IQR method):\n", outliers)
 
-# 7. Analyze target variable distribution (charges)
-plt.figure(figsize=(8, 6))
-sns.histplot(df['charges'], kde=True)
-plt.title("Distribution of Charges")
-plt.show()
+# 7. Analyze target variable distribution (if applicable)
+# Assuming there is a target variable named 'target'
+if 'target' in df.columns:
+    plt.figure(figsize=(8, 6))
+    sns.histplot(df['target'], kde=True)
+    plt.title("Distribution of Target Variable")
+    plt.show()
 
-plt.figure(figsize=(8, 6))
-sns.boxplot(y=df['charges'])
-plt.title("Boxplot of Charges")
-plt.show()
-
-# Additional analysis: Charges vs. other features
-
-# Charges vs. Smoker
-plt.figure(figsize=(8, 6))
-sns.boxplot(x='smoker', y='charges', data=df)
-plt.title("Charges vs. Smoker")
-plt.show()
-
-# Charges vs. Region
-plt.figure(figsize=(8, 6))
-sns.boxplot(x='region', y='charges', data=df)
-plt.title("Charges vs. Region")
-plt.show()
-
-# Charges vs. Age
-plt.figure(figsize=(8, 6))
-sns.scatterplot(x='age', y='charges', data=df)
-plt.title("Charges vs. Age")
-plt.show()
-
-# Charges vs. BMI
-plt.figure(figsize=(8, 6))
-sns.scatterplot(x='bmi', y='charges', data=df)
-plt.title("Charges vs. BMI")
-plt.show()
-
-# Charges vs. Children
-plt.figure(figsize=(8, 6))
-sns.boxplot(x='children', y='charges', data=df)
-plt.title("Charges vs. Children")
-plt.show()
+    plt.figure(figsize=(8, 6))
+    sns.boxplot(x=df['target'])
+    plt.title("Boxplot of Target Variable")
+    plt.show()
+else:
+    print("\nNo 'target' column found. Skipping target variable analysis.")
