@@ -15,3 +15,5 @@ dotenv
 langgraph
 langchain-community
 langchain-google-genai
+cryptography
+pymysql
