@@ -33,60 +33,101 @@ DataCronyx is an automated exploratory data analysis (EDA) and machine learning 
    ```
 
 3. **Run the app:**
-   ```bash
+   # DataCronyx
+
+   DataCronyx is an automated exploratory data analysis (EDA) and machine learning toolkit with an interactive Streamlit-based UI. The project bundles utilities for data exploration, preprocessing, feature engineering, model training and small automation agents used during development.
+
+   ## Quick overview
+
+   - Purpose: speed up EDA and baseline model experiments on tabular datasets (classification and regression).
+   - UI: built with Streamlit. Main app entry: `src/main.py`.
+
+   ## Project layout
+
+   - `src/` - Main Streamlit app and helper modules used by the UI:
+     - `data_analysis_functions.py`, `data_preprocessing_function.py`, `feature_engineering.py`, `model_training.py`, `home_page.py`, `main.py`.
+   - `example_dataset/` - Small CSV examples used by the app:
+     - `titanic.csv` (classification example)
+     - `insurance.csv` (regression example)
+   - `agent_module/` - Automation/agent code used for experiments and report generation. Contains two agent groups (`crewai` and `langchain`) with code, agent wrappers and summaries.
+   - `sql_scripts/` - SQL example scripts for datasets (foldered by dataset name).
+   - `logs/` - Application or agent logs (organized by date folders).
+   - `test.ipynb`, `test.py` - small tests / notebooks used during development.
+   - Other top-level docs: `R016_Report.docx`, `LICENSE`, `README.md`, `requirements.txt`.
+
+   ## Features
+
+   - Interactive EDA: summary statistics, charts and visualizations for quick inspection.
+   - Data preprocessing: missing value handling, categorical encoding, scaling and outlier checks.
+   - Feature engineering: PCA and K-best selection utilities.
+   - Model training: basic classification and regression model training and evaluation using scikit-learn.
+   - Sample datasets + custom dataset upload support.
+
+   ## Supported models (examples)
+
+   - Classification: Logistic Regression, Random Forest, SVM, Decision Tree, Gradient Boosting.
+   - Regression: Linear Regression, Random Forest, Ridge, Lasso, SVM, Decision Tree, Gradient Boosting.
+
+   ## Requirements
+
+   - Python 3.8+ recommended. The project was developed with standard data science packages—see `requirements.txt` for the full list.
+
+   ## Setup (Windows PowerShell)
+
+   1. Create and activate a virtual environment (PowerShell):
+
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+   2. Install dependencies:
+
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+   3. Run the Streamlit app:
+
+   ```powershell
    streamlit run src/main.py
    ```
 
-4. **Open in your browser:**  
-   Streamlit will provide a local URL (e.g., http://localhost:8501).
+   Streamlit will print a local URL (e.g. http://localhost:8501). Open that in your browser.
 
-## Usage
+   Notes:
+   - If PowerShell blocks script execution when activating the venv, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in the same session.
 
-- Use the sidebar to select a sample dataset or upload your own.
-- Navigate between "Custom EDA", "Data Preprocessing", "Feature Engineering", and "Model Training" using the sidebar.
-- Explore, preprocess, engineer features, and train models all within the app.
+   ## How to use
 
-## Supported Models
+   - Open the app and use the sidebar to pick a sample dataset or upload your own CSV/XLS file.
+   - Work through the tabs: Custom EDA -> Data Preprocessing -> Feature Engineering -> Model Training.
+   - Download or export trained models and evaluation summaries from the Model Training area when available.
 
-### Classification
+   ## Development notes
 
-- Logistic Regression
-- Random Forest
-- SVM
-- Decision Tree
-- Gradient Boosting
+   - The `agent_module/` folder contains prototype agents and helper scripts. These are experimental and primarily used to automate report generation and code-assisted EDA.
+   - Logs are stored under `logs/YYYY-MM-DD/datacronyx.log` when run with logging enabled.
 
-### Regression
+   ## Example: run one-off script
 
-- Linear Regression
-- Random Forest
-- Ridge
-- Lasso
-- SVM
-- Decision Tree
-- Gradient Boosting
+   - Run quick tests or scripts from the repo root (PowerShell):
 
-## File Structure
+   ```powershell
+   python test.py
+   ```
 
-- `src/` - Source code for the Streamlit app and modules.
-- `example_dataset/` - Sample datasets for demonstration.
+   ## Contributing
 
-## Requirements
+   - Bug reports and pull requests are welcome. Please include a short description of the environment and the steps to reproduce.
 
-- Python 3.7+
-- See `requirements.txt` for Python package dependencies.
+   ## License
 
-## License
+   This project is available under the MIT License. See `LICENSE` for details.
 
-MIT License
+   ## Acknowledgements
 
-## Acknowledgements
+   - Streamlit, scikit-learn, pandas, seaborn, plotly and the open-source Python data ecosystem.
 
-- [Streamlit](https://streamlit.io/)
-- [scikit-learn](https://scikit-learn.org/)
-- [pandas](https://pandas.pydata.org/)
-- [seaborn](https://seaborn.pydata.org/)
-- [plotly](https://plotly.com/python/)
-
----
+   ---
 
