@@ -1,0 +1,383 @@
+2025-10-08 21:20:20,529 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:20:20,531 [INFO] Home page displayed successfully.
+2025-10-08 21:26:05,645 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:26:05,650 [INFO] Home page displayed successfully.
+2025-10-08 21:26:08,741 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:26:08,745 [INFO] Home page displayed successfully.
+2025-10-08 21:26:08,982 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:08,983 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:14,678 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:14,678 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:14,683 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:26:36,951 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:36,951 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:36,956 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:26:40,215 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:40,215 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:40,219 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:26:47,045 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:47,045 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:47,049 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:26:53,228 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:26:53,229 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:26:53,232 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:27:04,561 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:04,561 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:04,565 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:27:09,693 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:09,693 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:09,697 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:27:15,257 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:15,257 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:15,262 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:27:23,902 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:23,902 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:23,907 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:27:34,045 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:34,046 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:34,135 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:27:36,748 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:36,748 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:38,744 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:38,744 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:43,319 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:43,319 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:43,455 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:27:44,642 [INFO] Starting ML Pipeline with LangGraph...
+2025-10-08 21:27:44,651 [INFO] Using dataset: example_dataset/titanic.csv
+2025-10-08 21:27:44,651 [INFO] Processing dataset: example_dataset/titanic.csv
+2025-10-08 21:27:47,023 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:47,023 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:47,110 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:27:50,631 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:50,631 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:50,712 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:27:51,925 [INFO] Saved file: agent_module/langchain/code/eda_code.py
+2025-10-08 21:27:51,925 [INFO] EDA code generated and saved.
+2025-10-08 21:27:52,883 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:52,883 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:52,965 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:27:54,762 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:27:54,762 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:27:54,767 [INFO] Removed columns: ['PassengerId', 'Ticket', 'Name']
+2025-10-08 21:27:54,767 [INFO] Removed columns: ['PassengerId', 'Ticket', 'Name']
+2025-10-08 21:27:54,846 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:00,594 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:00,594 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:00,682 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:05,653 [INFO] Saved file: agent_module/langchain/summary/eda_summary.md
+2025-10-08 21:28:05,653 [INFO] EDA summary generated and saved.
+2025-10-08 21:28:05,657 [INFO] Completed: eda -> Next: preprocessing
+2025-10-08 21:28:10,941 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:10,941 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:10,951 [INFO] Saved file: agent_module/langchain/code/preprocess_code.py
+2025-10-08 21:28:10,952 [INFO] Preprocessing code generated and saved.
+2025-10-08 21:28:11,048 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:12,912 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:12,913 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:12,926 [INFO] Filled missing data in columns ['Age'] using mean
+2025-10-08 21:28:12,927 [INFO] Filled missing data in columns: ['Age'] using mean
+2025-10-08 21:28:12,997 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:17,941 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:17,941 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:18,025 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:20,401 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:20,401 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:20,482 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:22,693 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:22,693 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:22,775 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:22,969 [INFO] Saved file: agent_module/langchain/summary/preprocess_summary.md
+2025-10-08 21:28:22,969 [INFO] Preprocessing summary generated and saved.
+2025-10-08 21:28:22,969 [INFO] Completed: preprocessing -> Next: feature_engineering
+2025-10-08 21:28:24,037 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:24,037 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:24,055 [INFO] One-hot encoded columns: ['Cabin', 'Embarked', 'Sex']
+2025-10-08 21:28:24,056 [INFO] One-hot encoding applied to columns: ['Cabin', 'Embarked', 'Sex']
+2025-10-08 21:28:24,151 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:29,433 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:29,434 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:29,514 [INFO] Saved file: agent_module/langchain/code/feature_code.py
+2025-10-08 21:28:29,514 [INFO] Feature engineering code generated and saved.
+2025-10-08 21:28:29,519 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:28:38,314 [INFO] Saved file: agent_module/langchain/summary/feature_summary.md
+2025-10-08 21:28:38,314 [INFO] Feature engineering summary generated and saved.
+2025-10-08 21:28:38,315 [INFO] Completed: feature_engineering -> Next: training
+2025-10-08 21:28:42,220 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:42,221 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:42,225 [INFO] Dataset reverted to original.
+2025-10-08 21:28:42,315 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:28:48,212 [INFO] Saved file: agent_module/langchain/code/train_code.py
+2025-10-08 21:28:48,212 [INFO] Training code generated and saved.
+2025-10-08 21:28:55,135 [INFO] Saved file: agent_module/langchain/summary/train_summary.md
+2025-10-08 21:28:55,135 [INFO] Training summary generated and saved.
+2025-10-08 21:28:55,136 [INFO] Completed: training -> Next: evaluation
+2025-10-08 21:28:55,260 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:55,260 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:55,264 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:28:57,967 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:57,967 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:58,048 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:28:59,276 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:28:59,277 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:28:59,280 [INFO] Dataset reverted to original.
+2025-10-08 21:28:59,355 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:29:02,368 [INFO] Saved file: agent_module/langchain/code/eval_code.py
+2025-10-08 21:29:02,369 [INFO] Evaluation code generated and saved.
+2025-10-08 21:29:03,995 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:03,995 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:04,072 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:29:05,378 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:05,378 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:05,453 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:29:07,894 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:07,894 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:07,967 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:29:10,348 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:10,349 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:10,353 [INFO] Removed columns: ['PassengerId', 'Name', 'Ticket']
+2025-10-08 21:29:10,353 [INFO] Removed columns: ['PassengerId', 'Name', 'Ticket']
+2025-10-08 21:29:10,429 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:29:14,499 [INFO] Saved file: agent_module/langchain/summary/eval_summary.md
+2025-10-08 21:29:14,500 [INFO] Evaluation summary generated and saved.
+2025-10-08 21:29:14,501 [INFO] Completed: evaluation -> Next: completed
+2025-10-08 21:29:14,501 [INFO] Pipeline complete! All agent outputs saved.
+2025-10-08 21:29:20,700 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:20,700 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:20,778 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:29:23,912 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:23,912 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:23,989 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:29:25,462 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:25,462 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:25,466 [INFO] Removed columns: ['Cabin']
+2025-10-08 21:29:25,467 [INFO] Removed columns: ['Cabin']
+2025-10-08 21:29:25,545 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:29:36,393 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:29:36,394 [INFO] Home page displayed successfully.
+2025-10-08 21:29:43,128 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:43,128 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:43,131 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:29:46,945 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:46,945 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:47,025 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:29:57,991 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:29:57,991 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:29:58,068 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:30:00,012 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:00,012 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:00,089 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:30:02,944 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:02,945 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:03,020 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:30:04,744 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:04,744 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:04,821 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:30:09,103 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:09,104 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:09,109 [INFO] Removed columns: ['PassengerId', 'Name', 'Cabin', 'Ticket']
+2025-10-08 21:30:09,110 [INFO] Removed columns: ['PassengerId', 'Name', 'Cabin', 'Ticket']
+2025-10-08 21:30:09,183 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:14,406 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:14,406 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:14,491 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:15,942 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:15,943 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:16,019 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:17,046 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:17,046 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:17,063 [INFO] One-hot encoded columns: ['Sex', 'Embarked']
+2025-10-08 21:30:17,064 [INFO] One-hot encoding applied to columns: ['Sex', 'Embarked']
+2025-10-08 21:30:17,128 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:26,547 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:26,547 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:26,625 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:31,829 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:31,829 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:31,906 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:33,629 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:33,629 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:33,636 [INFO] Filled missing data in columns ['Age'] using mean
+2025-10-08 21:30:33,636 [INFO] Filled missing data in columns: ['Age'] using mean
+2025-10-08 21:30:33,704 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:30:49,077 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:49,077 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:49,188 [INFO] Detected 0 outliers in Pclass using z-score
+2025-10-08 21:30:50,979 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:50,979 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:51,060 [INFO] Detected 30 outliers in SibSp using z-score
+2025-10-08 21:30:57,293 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:30:57,293 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:30:57,369 [INFO] Detected 30 outliers in SibSp using z-score
+2025-10-08 21:30:57,370 [INFO] Removed 30 outliers from SibSp
+2025-10-08 21:30:57,371 [INFO] Outliers removed from column: SibSp
+2025-10-08 21:31:06,159 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:31:06,159 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:31:12,008 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:31:12,008 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:31:14,294 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:31:14,294 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:31:19,154 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:31:19,156 [INFO] Home page displayed successfully.
+2025-10-08 21:31:19,162 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:31:19,162 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:31:21,097 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:31:21,098 [INFO] Home page displayed successfully.
+2025-10-08 21:31:51,115 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:31:51,115 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:31:51,121 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:04,714 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:04,714 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:04,718 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:06,999 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:07,000 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:07,004 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:16,278 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:16,278 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:16,282 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:21,911 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:21,912 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:21,916 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:26,928 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:26,928 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:26,933 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:30,829 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:30,830 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:30,835 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:35,373 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:35,373 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:35,377 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:32:43,228 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:43,229 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:43,305 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:32:50,898 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:50,898 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:50,989 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:32:52,031 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:52,031 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:52,114 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:32:53,218 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:53,219 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:53,298 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:32:54,277 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:54,277 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:54,364 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-08 21:32:55,767 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:55,767 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:32:55,771 [INFO] Removed columns: ['PassengerId', 'Name', 'Ticket', 'Cabin']
+2025-10-08 21:32:55,772 [INFO] Removed columns: ['PassengerId', 'Name', 'Ticket', 'Cabin']
+2025-10-08 21:32:55,850 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:32:59,945 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:32:59,946 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:00,030 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:01,294 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:01,295 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:01,375 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:03,298 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:03,298 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:03,312 [INFO] One-hot encoded columns: ['Sex', 'Embarked']
+2025-10-08 21:33:03,312 [INFO] One-hot encoding applied to columns: ['Sex', 'Embarked']
+2025-10-08 21:33:03,381 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:08,180 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:08,181 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:08,262 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:11,987 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:11,987 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:12,068 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:13,846 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:13,846 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:13,857 [INFO] Filled missing data in columns ['Age'] using mean
+2025-10-08 21:33:13,858 [INFO] Filled missing data in columns: ['Age'] using mean
+2025-10-08 21:33:13,928 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:19,319 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:19,319 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:19,396 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:33:19,397 [INFO] Removed 0 outliers from Survived
+2025-10-08 21:33:19,397 [INFO] Outliers removed from column: Survived
+2025-10-08 21:33:27,769 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:27,770 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:30,744 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:30,744 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:31,950 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:31,951 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:33,960 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:33,961 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:35,113 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:35,113 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:35,131 [INFO] PCA applied with 4 components.
+2025-10-08 21:33:42,111 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:42,111 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:49,565 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:49,565 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:50,225 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:50,225 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:51,301 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:51,302 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:51,309 [INFO] Selected top 4 features: ['Pclass', 'Age', 'Parch', 'Fare']
+2025-10-08 21:33:54,148 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:54,149 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:33:56,614 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:33:56,615 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:34:02,379 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:34:02,380 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:34:02,387 [INFO] Data split: (712, 10), (179, 10)
+2025-10-08 21:34:02,430 [INFO] Trained Logistic Regression classifier.
+2025-10-08 21:34:02,436 [INFO] Classification accuracy: 0.8100558659217877
+2025-10-08 21:34:08,384 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:34:08,385 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:34:12,877 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:34:12,878 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:34:14,650 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:34:14,650 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:34:14,660 [INFO] Starting ML Pipeline with LangGraph...
+2025-10-08 21:34:14,669 [INFO] Using dataset: example_dataset/titanic.csv
+2025-10-08 21:34:14,669 [INFO] Processing dataset: example_dataset/titanic.csv
+2025-10-08 21:34:20,383 [INFO] Saved file: agent_module/langchain/code/eda_code.py
+2025-10-08 21:34:20,383 [INFO] EDA code generated and saved.
+2025-10-08 21:34:35,487 [INFO] Saved file: agent_module/langchain/summary/eda_summary.md
+2025-10-08 21:34:35,487 [INFO] EDA summary generated and saved.
+2025-10-08 21:34:35,488 [INFO] Completed: eda -> Next: preprocessing
+2025-10-08 21:34:43,356 [INFO] Saved file: agent_module/langchain/code/preprocess_code.py
+2025-10-08 21:34:43,356 [INFO] Preprocessing code generated and saved.
+2025-10-08 21:34:55,098 [INFO] Saved file: agent_module/langchain/summary/preprocess_summary.md
+2025-10-08 21:34:55,098 [INFO] Preprocessing summary generated and saved.
+2025-10-08 21:34:55,099 [INFO] Completed: preprocessing -> Next: feature_engineering
+2025-10-08 21:35:01,358 [INFO] Saved file: agent_module/langchain/code/feature_code.py
+2025-10-08 21:35:01,359 [INFO] Feature engineering code generated and saved.
+2025-10-08 21:35:09,699 [INFO] Saved file: agent_module/langchain/summary/feature_summary.md
+2025-10-08 21:35:09,700 [INFO] Feature engineering summary generated and saved.
+2025-10-08 21:35:09,700 [INFO] Completed: feature_engineering -> Next: training
+2025-10-08 21:35:19,027 [INFO] Saved file: agent_module/langchain/code/train_code.py
+2025-10-08 21:35:19,028 [INFO] Training code generated and saved.
+2025-10-08 21:35:29,515 [INFO] Saved file: agent_module/langchain/summary/train_summary.md
+2025-10-08 21:35:29,515 [INFO] Training summary generated and saved.
+2025-10-08 21:35:29,516 [INFO] Completed: training -> Next: evaluation
+2025-10-08 21:35:39,354 [INFO] Saved file: agent_module/langchain/code/eval_code.py
+2025-10-08 21:35:39,355 [INFO] Evaluation code generated and saved.
+2025-10-08 21:35:51,339 [INFO] Saved file: agent_module/langchain/summary/eval_summary.md
+2025-10-08 21:35:51,339 [INFO] Evaluation summary generated and saved.
+2025-10-08 21:35:51,341 [INFO] Completed: evaluation -> Next: completed
+2025-10-08 21:35:51,341 [INFO] Pipeline complete! All agent outputs saved.
+2025-10-08 21:36:19,733 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:36:19,734 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:36:19,747 [INFO] EDA code downloaded as eda_code.py
+2025-10-08 21:36:57,478 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:36:57,478 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:36:57,514 [INFO] Evaluation code downloaded as eval_code.py
+2025-10-08 21:38:04,840 [INFO] Custom dark theme CSS generated successfully.
+2025-10-08 21:38:04,843 [INFO] Home page displayed successfully.
+2025-10-08 21:38:04,894 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:38:04,894 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:38:13,842 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:38:13,842 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:38:13,846 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:38:40,298 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:38:40,298 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:38:40,302 [INFO] Identified 3 numerical and 9 categorical columns
+2025-10-08 21:38:48,391 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:38:48,391 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:38:48,462 [INFO] Detected 0 outliers in Survived using z-score
+2025-10-08 21:39:05,463 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:39:05,463 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-08 21:39:14,480 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-08 21:39:14,481 [INFO] Titanic sample dataset loaded and session state updated.

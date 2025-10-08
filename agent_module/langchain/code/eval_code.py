@@ -2,106 +2,126 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, classification_report, confusion_matrix, roc_curve, auc
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_curve, auc, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder, StandardScaler
 import shap
-from sklearn.inspection import permutation_importance
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.linear_model import LogisticRegression  # Import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingRegressor, RandomForestRegressor
 
 # Load the dataset
-data = pd.read_csv("/var/folders/hn/z7dqkrys0jb521fxp_4sv30m0000gn/T/tmpjh1kms7r.csv")
+try:
+    df = pd.read_csv("example_dataset/titanic.csv")
+except FileNotFoundError:
+    print("Error: titanic.csv not found in example_dataset/. Please ensure the file exists.")
+    exit()
 
-# Preprocessing (handle missing values, encoding, scaling) - Adapt based on your data
-for col in data.columns:
-    if data[col].dtype == 'object':
-        try:
-            data[col] = pd.to_numeric(data[col])
-        except ValueError:
-            le = LabelEncoder()
-            data[col] = le.fit_transform(data[col])
+# Preprocessing (handling missing values and categorical features)
+df['Age'].fillna(df['Age'].median(), inplace=True)
+df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
 
-data = data.fillna(data.mean())
+le = LabelEncoder()
+df['Sex'] = le.fit_transform(df['Sex'])
+df['Embarked'] = le.fit_transform(df['Embarked'])
 
-# Identify target and features - Adapt based on your data
-target_column = data.columns[-1]
-X = data.drop(target_column, axis=1)
-y = data[target_column]
+# Define features and target
+X = df[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
+y = df['Survived']
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Feature scaling
+# Scale the data
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Load the model
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+try:
+    with open('model.pkl', 'rb') as file:
+        model = pickle.load(file)
+except FileNotFoundError:
+    print("Error: model.pkl not found. Please ensure the file exists.")
+    exit()
 
 # Make predictions
 y_pred = model.predict(X_test)
 
-# Model Evaluation
-if 'predict_proba' in dir(model):  # Classification
-    try:
-        y_prob = model.predict_proba(X_test)[:, 1]
-        fpr, tpr, thresholds = roc_curve(y_test, y_prob)
-        roc_auc = auc(fpr, tpr)
+# Evaluate the model
+if hasattr(model, "predict_proba"): #Classification
+    # Classification metrics
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Accuracy: {accuracy}")
 
-        plt.figure()
-        plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
-        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('Receiver Operating Characteristic')
-        plt.legend(loc="lower right")
+    print("Classification Report:")
+    print(classification_report(y_test, y_pred))
+
+    cm = confusion_matrix(y_test, y_pred)
+    sns.heatmap(cm, annot=True, fmt='d')
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.show()
+
+    # ROC curve and AUC
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+    fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+    roc_auc = auc(fpr, tpr)
+
+    plt.plot(fpr, tpr, label=f'AUC = {roc_auc:.2f}')
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve')
+    plt.legend()
+    plt.show()
+
+    # Feature importance
+    if hasattr(model, "feature_importances_"):
+        feature_importances = model.feature_importances_
+        feature_names = X.columns
+        importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances})
+        importance_df = importance_df.sort_values('Importance', ascending=False)
+
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x='Importance', y='Feature', data=importance_df)
+        plt.title('Feature Importance')
         plt.show()
 
-        print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
-        print("\nClassification Report:\n", classification_report(y_test, y_pred))
-        print("Accuracy:", accuracy_score(y_test, y_pred))
+    # SHAP values
+    try:
+        explainer = shap.KernelExplainer(model.predict_proba, shap.sample(pd.DataFrame(X_train, columns = X.columns), 10))
+        shap_values = explainer.shap_values(pd.DataFrame(X_test, columns = X.columns).iloc[0:10,:])
 
+        shap.summary_plot(shap_values, features=pd.DataFrame(X_test, columns = X.columns).iloc[0:10,:], class_names = ['Not Survived','Survived'])
     except Exception as e:
-        print(f"Error during classification evaluation: {e}")
-        print("Accuracy:", accuracy_score(y_test, y_pred))
-
-else:  # Regression
+        print(f"SHAP value calculation failed: {e}")
+else: #Regression
+    # Regression metrics
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
-    print("Mean Squared Error:", mse)
-    print("R-squared:", r2)
 
-    plt.scatter(y_test, y_pred)
-    plt.xlabel("Actual Values")
-    plt.ylabel("Predicted Values")
-    plt.title("Actual vs. Predicted Values")
-    plt.show()
+    print(f"Mean Squared Error: {mse}")
+    print(f"R-squared: {r2}")
 
-# Feature Importance (Permutation Importance)
-try:
-    result = permutation_importance(model, X_test, y_test, n_repeats=10, random_state=42)
-    importance = result.importances_mean
+    # Feature importance
+    if hasattr(model, "feature_importances_"):
+        feature_importances = model.feature_importances_
+        feature_names = X.columns
+        importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances})
+        importance_df = importance_df.sort_values('Importance', ascending=False)
 
-    plt.figure(figsize=(10, 6))
-    plt.bar(X.columns, importance)
-    plt.xticks(rotation=90)
-    plt.title('Permutation Feature Importance')
-    plt.xlabel('Features')
-    plt.ylabel('Importance')
-    plt.tight_layout()
-    plt.show()
-except Exception as e:
-    print(f"Error during permutation importance: {e}")
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x='Importance', y='Feature', data=importance_df)
+        plt.title('Feature Importance')
+        plt.show()
 
-# SHAP values
-try:
-    explainer = shap.KernelExplainer(model.predict, X_train[:50])
-    shap_values = explainer.shap_values(X_test[:50])
-    shap.summary_plot(shap_values, X_test[:50], feature_names=X.columns)
+    # SHAP values
+    try:
+        explainer = shap.KernelExplainer(model.predict, shap.sample(pd.DataFrame(X_train, columns = X.columns), 10))
+        shap_values = explainer.shap_values(pd.DataFrame(X_test, columns = X.columns).iloc[0:10,:])
 
-except Exception as e:
-    print(f"Error during SHAP analysis: {e}")
+        shap.summary_plot(shap_values, features=pd.DataFrame(X_test, columns = X.columns).iloc[0:10,:])
+    except Exception as e:
+        print(f"SHAP value calculation failed: {e}")
