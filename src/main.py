@@ -17,6 +17,70 @@ from typing import Optional
 import model_training
 import feature_engineering
 import pickle
+from supabase_utils import create_user, authenticate, get_user_by_id
+
+
+
+
+# --- Authentication UI ---
+if 'user_id' not in st.session_state:
+    st.session_state.user_id = None
+if 'username' not in st.session_state:
+    st.session_state.username = None
+
+def login_form():
+    st.subheader("Login")
+    username = st.text_input("Username", key="login_username")
+    password = st.text_input("Password", type="password", key="login_password")
+    login_btn = st.button("Login")
+    if login_btn:
+        user_id = authenticate(username, password)
+        if user_id:
+            st.session_state.user_id = user_id
+            st.session_state.username = username
+            st.success(f"Welcome, {username}!")
+            st.rerun()
+        else:
+            st.error("Invalid username or password.")
+
+def register_form():
+    st.subheader("Register")
+    username = st.text_input("Username", key="register_username")
+    password = st.text_input("Password", type="password", key="register_password")
+    register_btn = st.button("Register")
+    if register_btn:
+        if create_user(username, password):
+            st.success("Registration successful! Please log in.")
+        else:
+            st.error("Username already exists or registration failed.")
+
+def logout():
+    st.session_state.user_id = None
+    st.session_state.username = None
+    st.rerun()
+
+
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from collections import Counter
+import plotly.express as px
+import data_analysis_functions as function
+import data_preprocessing_function as preprocessing_function
+import home_page
+import base64
+import logging
+import os
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
+from typing import Optional
+import model_training
+import feature_engineering
+import pickle
 
 # Ensure logs directory exists (date-wise)
 log_date = datetime.now().strftime("%Y-%m-%d")
@@ -54,7 +118,10 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 #uncomment the above lines of code when we want to remove made with streamlit logo and also the top right three-dots icon
 
-
+if st.session_state.user_id is not None:
+    st.sidebar.markdown(f"**Logged in as:** `{st.session_state.username}`")
+    if st.sidebar.button("Logout", key="sidebar_logout_btn"):
+        logout()
 
 # Create a Streamlit sidebar
 st.sidebar.title("DataCronyx")
@@ -64,10 +131,16 @@ st.sidebar.title("DataCronyx")
 custom_css = home_page.custom_css
 
 
+
+
 # Create the introduction section
 st.title("Welcome to DataCronyx")
 # st.write('<div class="tagline">Unleash the Power of Data with DataCronyx!</div>', unsafe_allow_html=True)
 
+
+# Show user info and logout button above navigation
+
+    # st.sidebar.markdown("---")
 
 selected = st.sidebar.radio(
     "Navigation",
@@ -83,9 +156,27 @@ selected = st.sidebar.radio(
     }[x]
 )
 
+# --- Authentication and Home logic (must be after 'selected' is defined) ---
+# Sidebar user info and logout
+# if st.session_state.user_id is not None:
+#     st.sidebar.markdown(f"**Logged in as:** `{st.session_state.username}`")
+#     if st.sidebar.button("Logout"):
+#         logout()
+#     st.sidebar.markdown("---")
+
+# Always show Home page, even if not logged in
 if selected == 'Home':
     home_page.show_home_page()
 
+# If not logged in and not on Home, show login/register UI and stop
+if st.session_state.user_id is None and selected != 'Home':
+    st.markdown("---")
+    auth_mode = st.radio("Login or Register", ["Login", "Register"], horizontal=True)
+    if auth_mode == "Login":
+        login_form()
+    else:
+        register_form()
+    st.stop()
 
 # Sample dataset selection in sidebar
 sample_dataset = st.sidebar.selectbox(

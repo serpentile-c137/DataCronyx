@@ -1,0 +1,41 @@
+2025-10-13 20:08:42,930 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:08:42,931 [INFO] Home page displayed successfully.
+2025-10-13 20:12:55,768 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:13:22,053 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:13:22,464 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:13:22,466 [INFO] Home page displayed successfully.
+2025-10-13 20:16:07,687 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:16:08,362 [INFO] HTTP Request: POST https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users "HTTP/2 201 Created"
+2025-10-13 20:16:16,874 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:16:17,287 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:16:17,289 [INFO] Home page displayed successfully.
+2025-10-13 20:17:47,090 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id&username=eq.test1 "HTTP/2 200 OK"
+2025-10-13 20:17:47,697 [INFO] HTTP Request: POST https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users "HTTP/2 201 Created"
+2025-10-13 20:17:56,462 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test1 "HTTP/2 200 OK"
+2025-10-13 20:17:56,874 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:17:56,876 [INFO] Home page displayed successfully.
+2025-10-13 20:20:47,773 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:20:47,775 [INFO] Home page displayed successfully.
+2025-10-13 20:20:59,440 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:20:59,442 [INFO] Home page displayed successfully.
+2025-10-13 20:21:13,728 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:21:30,548 [INFO] Loaded CSV data with shape (1338, 7)
+2025-10-13 20:21:30,548 [INFO] Insurance sample dataset loaded and session state updated.
+2025-10-13 20:21:30,567 [INFO] Identified 3 numerical and 4 categorical columns
+2025-10-13 20:23:55,442 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:23:55,445 [INFO] Home page displayed successfully.
+2025-10-13 20:24:03,227 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:25:04,604 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:25:04,607 [INFO] Home page displayed successfully.
+2025-10-13 20:25:11,733 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:26:18,628 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-13 20:26:18,628 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-13 20:26:18,746 [INFO] Detected 0 outliers in PassengerId using z-score
+2025-10-13 20:26:21,542 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:26:21,544 [INFO] Home page displayed successfully.
+2025-10-13 20:26:22,202 [INFO] Custom dark theme CSS generated successfully.
+2025-10-13 20:26:22,204 [INFO] Home page displayed successfully.
+2025-10-13 20:26:48,734 [INFO] HTTP Request: GET https://vwzzwmkwbgssxknerkxv.supabase.co/rest/v1/users?select=id%2Cpassword_hash&username=eq.test "HTTP/2 200 OK"
+2025-10-13 20:26:58,196 [INFO] Loaded CSV data with shape (891, 12)
+2025-10-13 20:26:58,197 [INFO] Titanic sample dataset loaded and session state updated.
+2025-10-13 20:26:58,317 [INFO] Detected 0 outliers in PassengerId using z-score
