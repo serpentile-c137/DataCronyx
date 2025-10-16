@@ -2,6 +2,12 @@
 
 DataCronyx is an automated exploratory data analysis (EDA) and machine learning platform built with Streamlit. It provides an interactive interface for data exploration, preprocessing, feature engineering, and model training.
 
+Project URL: https://datacronyx.streamlit.app/
+
+![Home screenshot](images/home.png "Home - DataCronyx")
+
+![Agent pipeline screenshot](images/agent_pipeline.png "Agent Pipeline - DataCronyx")
+
 ## Features
 
 - **Sidebar Navigation:** All main actions (EDA, preprocessing, feature engineering, model training) are accessible from the always-open sidebar.
